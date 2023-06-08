@@ -2,7 +2,7 @@
   "name": "filmoteka-project-2",
   "version": "1.1.0",
   "description": "",
-  "homepage": "hhttps://kingamiko.github.io/Filmoteka-project-2/",
+  "homepage": "https://kingamiko.github.io/Filmoteka-project-2/",
   "scripts": {
     "dev": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url Filmoteka-project-2"
