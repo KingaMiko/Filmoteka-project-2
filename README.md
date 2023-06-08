@@ -12,7 +12,7 @@ Jeden raz na projekt zainstalować wszystkie zalezności.
 npm ci
 ```
 
-### Praca
+### Praca w projekcie
 
 Włączyć tryp pracy.
 
