@@ -2,20 +2,20 @@
   "name": "filmoteka-project-2",
   "version": "1.1.0",
   "description": "",
-  "homepage": "https://kingamiko.github.io/filmoteka-project-2/",
+  "homepage": "https://kingamiko.github.io/Filmoteka-project-2/",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url filmoteka-project-2"
+    "build": "parcel build src/*.html --public-url Filmoteka-project-2"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kingamiko/filmoteka-project-2.git"
+    "url": "git+https://github.com/kingamiko/Filmoteka-project-2.git"
   },
   "keywords": [],
   "author": "Kinga Mikołajczyk <kinga.mikola@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kingamiko/filmoteka-project-2/issues"
+    "url": "https://github.com/kingamiko/Filmoteka-project-2/issues"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.3",
