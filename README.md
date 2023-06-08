@@ -41,7 +41,7 @@ Po jakimś czasie stronę mozna będzie zobaczyć na zywo pod adresem który je
 właściwości `homepage`, na przykład
 [https://goitacademy.github.io/parcel-project-template](https://goitacademy.github.io/parcel-project-template).
 
-## Pliki i foldery
+## Pliki
 
 - Wszystkie partials plików styłów powinny być w folderze `src/sass` i importować się w
   `src/sass/main.scss`
