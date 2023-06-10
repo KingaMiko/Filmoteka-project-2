@@ -54,16 +54,19 @@
 .logo {
   display: flex;
   align-items: center;
-  margin-right: 8px;
+  transition: stroke color $transition-standard;
 }
+
 .logo__icon {
   stroke-width: 2px;
   stroke: $color-header;
   width: 24px;
   height: 24px;
+  transition: stroke $transition-standard;
 }
 
-.logo-title {
+.logo__title {
+  margin-left: 10px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
@@ -71,18 +74,21 @@
   line-height: 1.16;
   color: $color-header;
   transition: color $transition-standard;
-  &:hover {
-    color: $color-accent;
-  }
-  &:focus {
-    color: $color-accent;
-  }
+  cursor: pointer;
+
   @media screen and (min-width: 768px) {
     display: block;
   }
   @media screen and (max-width: 768px) {
     display: none;
   }
+}
+
+.logo:hover .logo__icon {
+  stroke: $color-accent-sec;
+}
+.logo:hover .logo__title {
+  color: $color-accent;
 }
 
 .header__nav {
@@ -123,17 +129,18 @@
   line-height: 1.14;
 }
 
-.search-form__error {
-  display: flex;
-  justify-content: center;
-  padding-top: 40px;
-  font-size: 14px;
-  line-height: 1.14;
-  text-align: left;
-  width: 280px;
+// .search-form__error {
+//   display: flex;
+//   justify-content: center;
+//   padding-top: 40px;
+//   font-size: 14px;
+//   line-height: 1.14;
+//   text-align: left;
+//   width: 280px;
 
-  color: $color-link-underline;
-}
+//   color: $color-link-underline;
+// }
+
 .header__search-form-input {
   width: 280px;
   font-family: 'Roboto';
@@ -157,6 +164,25 @@
 }
 .header__pane-search-form {
   position: relative;
+}
+
+.header__serach-form-btn {
+  border: none;
+  background: none;
+  position: relative;
+  left: -21;
+  cursor: pointer;
+}
+
+.header__serach-form-icon {
+  stroke: $color-header;
+  width: 12px;
+  height: 12px;
+  transition: stroke $transition-standard;
+  &:focus,
+  &:hover {
+    stroke: $color-accent-sec;
+  }
 }
 
 .header-container {
