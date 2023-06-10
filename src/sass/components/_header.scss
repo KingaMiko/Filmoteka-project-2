@@ -1,5 +1,6 @@
 .home {
-  background: url(/src/images/header-main/header-bg-320-1x.jpg);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url(/src/images/header-main/header-bg-320-1x.jpg);
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -7,17 +8,17 @@
   height: 230px;
 
   @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(/src/images/header-main/header-bg-320-2x.jpg);
   }
 
   @media screen and (min-width: 768px) {
     height: 220px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(/src/images/header-main/header-bg-768-1x.jpg);
 
     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
         url(/src/images/header-main/header-bg-768-2x.jpg);
     }
   }
@@ -25,11 +26,11 @@
   @media screen and (min-width: 1024px) {
     height: 215px;
 
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(/src/images/header-main/header-bg-1280-1x.jpg);
 
     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
         url(/src/images/header-main/header-bg-1280-2x.jpg);
     }
   }
@@ -102,7 +103,7 @@
 }
 
 .header__panes {
-  padding-top: 118px;
+  padding-top: 115px;
   width: 100%;
 }
 
@@ -128,18 +129,6 @@
   font-size: 14px;
   line-height: 1.14;
 }
-
-// .search-form__error {
-//   display: flex;
-//   justify-content: center;
-//   padding-top: 40px;
-//   font-size: 14px;
-//   line-height: 1.14;
-//   text-align: left;
-//   width: 280px;
-
-//   color: $color-link-underline;
-// }
 
 .header__search-form-input {
   width: 280px;
