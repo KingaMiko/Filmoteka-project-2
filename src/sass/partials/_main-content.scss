@@ -1,0 +1,30 @@
+.main-content {
+    width: 100%;
+    margin: 0 auto;
+    background-color: transparent;
+    display: block;
+
+    &__container {
+        width: 100%;
+        max-width: 320px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    &__list {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-width: 320px;
+        max-width: 320px;
+    }
+
+    &__pagination {
+        display: block;
+        margin: 0 auto;
+    }
+}
