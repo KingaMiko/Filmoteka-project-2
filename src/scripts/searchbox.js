@@ -45,6 +45,7 @@ async function findMovie(e) {
       image.src = movie.poster_path
         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
         : 'placeholder-image.jpg';
+      image;
 
       const info = document.createElement('div');
       info.classList.add('card__info');
