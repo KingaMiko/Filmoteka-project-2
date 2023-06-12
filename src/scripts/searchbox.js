@@ -1,5 +1,6 @@
 import { API_KEY } from './api-service';
 import Notiflix from 'notiflix';
+import { createGallery } from './gallery';
 
 const MOVIES_PATH = 'https://api.themoviedb.org/3/search/movie';
 const GENRES_PATH = 'https://api.themoviedb.org/3/genre/movie/list';
@@ -11,12 +12,15 @@ async function findMovie(e) {
   e.preventDefault();
   const searchQuery = searchBox.value.trim();
   if (searchQuery === '') {
+    Notiflix.Notify.warning('The field cannot be empty. Enter correct movie title');
+    clearMovies();
+    createGallery();
     return;
   }
   try {
     const movies = await searchMovies(searchQuery);
     if (movies.length === 0) {
-      Notiflix.Notify.failure(
+      Notiflix.Notify.warning(
         'Search result not successful. Enter the correct movie name and try again',
       );
       clearMovies();
