@@ -1,3 +1,5 @@
 import './sass/main.scss';
-import './gallery.js';
-import './searchbox.js';
+import './scripts/api-service';
+import './scripts/fetch';
+import './scripts/gallery';
+//import './scripts/searchbox';

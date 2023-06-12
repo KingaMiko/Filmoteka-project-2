@@ -23,6 +23,7 @@
     "posthtml-include": "^1.7.4"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8"
   }
 }
