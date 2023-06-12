@@ -1,19 +1,21 @@
-mybutton = document.querySelector('#myBtn');
-mybutton.addEventListener('click', topFunction);
+window.addEventListener('DOMContentLoaded', () => {
+  myButton = document.querySelector('.back-to-top');
+  myButton.addEventListener('click', topFunction);
 
-window.onscroll = function () {
-  scrollFunction();
-};
+  window.onscroll = function () {
+    scrollFunction();
+  };
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = 'block';
-  } else {
-    mybutton.style.display = 'none';
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      myButton.style.display = 'block';
+    } else {
+      myButton.style.display = 'none';
+    }
   }
-}
 
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+});
