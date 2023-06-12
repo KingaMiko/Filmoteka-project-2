@@ -1,5 +1,5 @@
 let mybutton = document.querySelector('.back-to-top');
-console.log(mybutton);
+
 mybutton.addEventListener('click', topFunction);
 
 window.onscroll = function () {
