@@ -27,10 +27,7 @@
     "axios": "^1.4.0",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
-<<<<<<< HEAD
     "tui-pagination": "^3.4.1"
-=======
     "notiflix": "^3.2.6"
->>>>>>> bb496858b3edd2d888930ff29693f9f9f72b4594
   }
 }
