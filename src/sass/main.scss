@@ -8,9 +8,10 @@
 @import './utils/variables';
 @import './utils/container';
 
-@import './components/header';
-@import './components/header-library';
-@import './components/footer';
+@import './layout/header';
+@import './layout/header-library';
+@import './layout/footer';
 
-@import './components/gallery';
+@import './layout/gallery';
 @import './partials/typography';
+@import './partials/backToTop';
