@@ -4,4 +4,4 @@ import './scripts/fetch';
 import './scripts/pagintaion';
 import './scripts/gallery';
 import './scripts/components/backToTop';
-//import './scripts/searchbox';
+import './scripts/searchbox';
