@@ -82,3 +82,12 @@
     height: 70px;
   }
 }
+
+.no-results {
+  display: flex;
+  width: 200px;
+  height: 200px;
+  background-image: url('/src/images/svg/no-results.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
