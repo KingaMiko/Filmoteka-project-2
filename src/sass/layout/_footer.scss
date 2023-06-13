@@ -10,66 +10,71 @@
     padding-top: 30px;
     padding-bottom: 30px;
   }
-
+  
   &__text {
-    color: $color-footer;
-    line-height: calc(16 / 14);
-    letter-spacing: 0.03em;
-    @media screen and (min-width: 768px) {
-      font-size: 16px;
-      line-height: calc(19 / 16);
-      margin-right: 7px;
+  color: $color-footer;
+  line-height: calc(16 / 14);
+  letter-spacing: 0.03em;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: calc(19 / 16);
+    margin-right: 7px;
     }
   }
-
+  
   &__container {
     @media screen and (min-width: 768px) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  &__link {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: $color-footer;
-    line-height: calc(16 / 14);
-    letter-spacing: 0.03em;
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-      color: $color-accent;
-    }
-    @media screen and (min-width: 768px) {
-      font-size: 16px;
-      line-height: calc(19 / 16);
-      padding: 0;
-    }
-  }
-
-  &__sub {
     display: flex;
-    color: $color-footer;
-    line-height: calc(16 / 14);
-    letter-spacing: 0.03em;
     align-items: center;
     justify-content: center;
-    @media screen and (min-width: 768px) {
-      font-size: 16px;
-      line-height: calc(19 / 16);
     }
   }
-
+    
+  &__authors{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: $color-footer;
+  line-height: calc(16 / 14);
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  
+  &:hover,
+  &:focus {
+    color: $color-accent;
+    }
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: calc(19 / 16);
+    padding: 0;
+    }
+  }
+    
+  &__sub {
+  display: flex;
+  color: $color-footer;
+  font-family: $font-basic;
+  line-height: calc(16 / 14);
+  letter-spacing: 0.03em;
+  align-items: center;
+  justify-content: center;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: calc(19 / 16);
+    }
+  }
+  
   &__icon {
-    margin-left: 10px;
-    margin-right: 10px;
+  fill: $color-accent;
+  margin-right: 10px;
+  margin-left: 10px;
+  animation: Scale 0.7s ease infinite alternate;
+  @keyframes Scale {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.5);
+    }
   }
 }
-
-.footer {
-  &.dark-theme {
-    background-color: rgb(31, 31, 32);
-  }
 }
