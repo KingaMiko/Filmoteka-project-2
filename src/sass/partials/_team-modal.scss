@@ -103,6 +103,13 @@ body.show-modal {
   gap: 16px;
 }
 
+.member__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .member__thumb {
   width: 120px;
   height: 140px;
@@ -143,6 +150,7 @@ body.show-modal {
     color: $color-accent;
   }
 }
+
 .modal {
   &.dark-theme {
     background-color: rgb(37, 37, 39);
