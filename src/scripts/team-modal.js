@@ -37,7 +37,7 @@ function loadIntoTeamModal(list) {
 
   refs.modalRef.innerHTML = '';
   refs.teamRef.innerHTML = markup;
-  //refs.closeModalButton.addEventListener('click', onCloseModal);
+  refs.closeModalButton.addEventListener('click', onCloseModal);
 }
 
 function onOpenModal(e) {
