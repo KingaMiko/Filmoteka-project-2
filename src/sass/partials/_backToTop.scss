@@ -6,7 +6,7 @@
   z-index: 999;
   border: none;
   outline: none;
-  background-color: $color-text-invalid;
+  background-color: rgba(188, 12, 12, 0.55);
   color: $color-header;
   cursor: pointer;
   padding: 15px;
@@ -15,5 +15,5 @@
 }
 
 .back-to-top:hover {
-  background-color: $color-link-underline;
+  background-color: rgba(188, 12, 12, 0.88);
 }
