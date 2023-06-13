@@ -64,6 +64,15 @@
   width: 24px;
   height: 24px;
   transition: stroke $transition-standard;
+  animation: Scale 1.5s ease infinite alternate;
+  @keyframes Scale {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.5);
+    }
+  }
 }
 
 .logo__title {
