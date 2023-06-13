@@ -150,3 +150,7 @@ body.show-modal {
     color: $color-accent;
   }
 }
+
+.modal {
+  &.dark-theme {
+    background-color: rgb(37, 37, 39);
