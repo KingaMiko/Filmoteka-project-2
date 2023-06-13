@@ -4,7 +4,7 @@ const refs = {
   footerLink: document.querySelector('.footer__authors'),
   modalRef: document.querySelector('.modal__wrap'),
   teamRef: document.querySelector('.team__wrap'),
-  closeModalButton: document.querySelector('.close-modal') // Dodany element przycisku z klasą "close-modal"
+  closeModalButton: document.querySelector('.modal__btn-close') // Dodany element przycisku z klasą "close-modal"
 };
 
 refs.footerLink.addEventListener('click', onOpenModal);
@@ -37,13 +37,22 @@ function loadIntoTeamModal(list) {
 
   refs.modalRef.innerHTML = '';
   refs.teamRef.innerHTML = markup;
-  //refs.closeModalButton.addEventListener('click', onCloseModal);
+ 
 }
 
 function onOpenModal(e) {
   document.body.classList.add('show-modal');
   window.addEventListener('keydown', onEscKeyPress);
+  refs.closeModalButton.addEventListener('click', onCloseModal);
   loadIntoTeamModal(teamList);
+
+  document.addEventListener('click', onOutsideClick);
+}
+
+function onOutsideClick(e) {
+  if (!e.target.closest('.modal') && !e.target.classList.contains('footer__authors')) {
+    onCloseModal();
+  }
 }
 
 function onCloseModal() {
