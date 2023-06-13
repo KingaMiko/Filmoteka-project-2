@@ -24,7 +24,8 @@ async function findMovie(e) {
         'Search result not successful. Enter the correct movie name and try again',
       );
       clearMovies();
-      // Dodać coś, ze nie znaleziono filmu. Ikona? tekst? zdjęcie?
+      showNoResultsMessage();
+      searchBox.value = '';
       return;
     }
 
@@ -42,10 +43,10 @@ async function findMovie(e) {
 
       const image = document.createElement('img');
       image.classList.add('card__pic');
+      image.load = 'lazy';
       image.src = movie.poster_path
         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : 'placeholder-image.jpg';
-      image;
+        : 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
 
       const info = document.createElement('div');
       info.classList.add('card__info');
@@ -77,6 +78,8 @@ async function findMovie(e) {
     Notiflix.Notify.failure(
       'Search result not successful. Enter the correct movie name and try again',
     );
+  } finally {
+    searchBox.value = '';
   }
 }
 
@@ -106,6 +109,12 @@ async function fetchGenres() {
 
 function clearMovies() {
   gallery.innerHTML = '';
+}
+
+function showNoResultsMessage() {
+  const noResultsMessage = document.createElement('div');
+  noResultsMessage.classList.add('no-results');
+  gallery.appendChild(noResultsMessage);
 }
 
 searchForm.addEventListener('submit', findMovie);
