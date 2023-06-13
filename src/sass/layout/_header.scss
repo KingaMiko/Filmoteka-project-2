@@ -185,7 +185,12 @@
   position: absolute;
   right: 0;
   top: 180px;
+
+  @media screen and (min-width: 768px) {
+    top: 170px;
+  }
 }
+
 .theme-switch {
   display: flex;
   align-items: center;
