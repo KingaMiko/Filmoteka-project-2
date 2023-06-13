@@ -41,9 +41,9 @@ async function findMovie(e) {
       const link = document.createElement('a');
       link.href = `https://www.themoviedb.org/movie/${movie.id}`;
 
-      const image = document.createElement('img');
+      const image = new Image();
       image.classList.add('card__pic');
-      image.load = 'lazy';
+      image.loading = 'lazy';
       image.src = movie.poster_path
         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
         : 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
