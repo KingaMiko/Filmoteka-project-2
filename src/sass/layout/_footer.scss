@@ -1,17 +1,17 @@
 .footer {
-    background-color: $color-bcg-footer;
-    height: 100px;
-    width: 100%;
-    padding-top: 28px;
-    padding-bottom: 29px;
-    text-align: center;
-    @media screen and (min-width: 768px) {
-      height: 79px;
-      padding-top: 30px;
-      padding-bottom: 30px;
-    }
-    
-    &__text {
+  background-color: $color-bcg-footer;
+  height: 100px;
+  width: 100%;
+  padding-top: 28px;
+  padding-bottom: 29px;
+  text-align: center;
+  @media screen and (min-width: 768px) {
+    height: 79px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  &__text {
     color: $color-footer;
     line-height: calc(16 / 14);
     letter-spacing: 0.03em;
@@ -19,18 +19,18 @@
       font-size: 16px;
       line-height: calc(19 / 16);
       margin-right: 7px;
-        }
     }
+  }
 
-    &__container {
+  &__container {
     @media screen and (min-width: 768px) {
       display: flex;
       align-items: center;
       justify-content: center;
-        }
     }
-    
-    &__link {
+  }
+
+  &__link {
     padding-top: 10px;
     padding-bottom: 10px;
     color: $color-footer;
@@ -41,15 +41,15 @@
     &:hover,
     &:focus {
       color: $color-accent;
-        }
+    }
     @media screen and (min-width: 768px) {
       font-size: 16px;
       line-height: calc(19 / 16);
       padding: 0;
-        }
     }
-    
-    &__sub {
+  }
+
+  &__sub {
     display: flex;
     color: $color-footer;
     line-height: calc(16 / 14);
@@ -59,11 +59,17 @@
     @media screen and (min-width: 768px) {
       font-size: 16px;
       line-height: calc(19 / 16);
-        }
     }
-    
-    &__icon {
+  }
+
+  &__icon {
     margin-left: 10px;
     margin-right: 10px;
+  }
+}
+
+.footer {
+  &.dark-theme {
+    background-color: rgb(31, 31, 32);
   }
 }
