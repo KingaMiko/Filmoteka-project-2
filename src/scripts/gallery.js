@@ -39,6 +39,39 @@ export async function createGallery() {
       const displayedGenres = movieGenres.slice(0, maxGenres);
       subtitle.textContent = `${displayedGenres.join(', ')} | ${year}`;
 
+      // // Tworzenie przycisku traileru
+      // function createTrailerButton(movieId) {
+      //   const button = document.createElement('button');
+      //   button.classList.add('card', 'trailer-button');
+      //   button.textContent = 'Trailer';
+
+      //   button.addEventListener('click', async () => {
+      //     try {
+      //       const movieDetails = await fetchMovieDetails(movieId);
+      //       const trailer = movieDetails.videos.results.find(video => video.type === 'Trailer');
+
+      //       if (trailer) {
+      //         const youtubeUrl = `https://www.youtube.com/watch?v=${trailer.key}`;
+      //         window.open(youtubeUrl, '_blank');
+      //       } else {
+      //         console.log('Brak trailera. ');
+      //       }
+      //     } catch (error) {
+      //       console.error('Wystąpił błąd:', error);
+      //     }
+      //   });
+
+      //   return button;
+      // }
+
+      // const trailerButton = createTrailerButton(movie.id);
+      // card.appendChild(trailerButton);
+
+      // //KONIEC
+
+      const trailerButton = createTrailerButton(movie.id);
+      link.appendChild(trailerButton);
+
       info.appendChild(title);
       info.appendChild(subtitle);
 
@@ -52,5 +85,40 @@ export async function createGallery() {
     console.error('Wystąpił błąd:', error);
   }
 }
+// trailer
+
+async function fetchMovieDetails(movieId) {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=videos`,
+  );
+  const data = await response.json();
+  return data;
+}
+
+function createTrailerButton(movieId) {
+  const button = document.createElement('button');
+  button.classList.add('card', 'trailer-button');
+  button.textContent = 'Trailer';
+
+  button.addEventListener('click', async () => {
+    try {
+      const movieDetails = await fetchMovieDetails(movieId);
+
+      const trailer = movieDetails.videos.results.find(video => video.type === 'Trailer');
+
+      if (trailer) {
+        const youtubeUrl = `https://www.youtube.com/watch?v=${trailer.key}`;
+        window.open(youtubeUrl, '_blank', 'noopener');
+      } else {
+        console.log('Brak trailera.');
+      }
+    } catch (error) {
+      console.error('Wystąpił błąd:', error);
+    }
+  });
+
+  return button;
+}
+// koniec
 
 createGallery();
