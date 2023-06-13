@@ -6,3 +6,5 @@ import './scripts/gallery';
 import './scripts/components/backToTop';
 import './scripts/searchbox';
 import './scripts/components/darkTheme';
+import './scripts/team';
+import './scripts/team-modal';
