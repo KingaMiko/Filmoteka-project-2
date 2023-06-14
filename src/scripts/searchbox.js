@@ -1,6 +1,6 @@
 import { API_KEY } from './api-service';
 import Notiflix from 'notiflix';
-import { createGallery } from './gallery';
+import { createGallery, createTrailerButton } from './gallery';
 
 const MOVIES_PATH = 'https://api.themoviedb.org/3/search/movie';
 const GENRES_PATH = 'https://api.themoviedb.org/3/genre/movie/list';
@@ -116,5 +116,5 @@ function showNoResultsMessage() {
   noResultsMessage.classList.add('no-results');
   gallery.appendChild(noResultsMessage);
 }
-
+createTrailerButton(movieId);
 searchForm.addEventListener('submit', findMovie);

@@ -43,6 +43,9 @@ export async function createGallery(page = 1) {
       const year = movie.release_date.substring(0, 4);
       subtitle.textContent = `${year}`;
 
+      const trailerButton = createTrailerButton(movie.id);
+      link.appendChild(trailerButton);
+
       link.appendChild(image);
       link.appendChild(info);
 
@@ -75,6 +78,31 @@ export async function createGallery(page = 1) {
   } catch (error) {
     console.error('Wystąpił błąd:', error);
   }
+}
+
+export function createTrailerButton(movieId) {
+  const button = document.createElement('button');
+  button.classList.add('card', 'trailer-button');
+  button.textContent = 'Trailer';
+
+  button.addEventListener('click', async () => {
+    try {
+      const movieDetails = await fetchMovieDetails(movieId);
+
+      const trailer = movieDetails.videos.results.find(video => video.type === 'Trailer');
+
+      if (trailer) {
+        const youtubeUrl = `https://www.youtube.com/watch?v=${trailer.key}`;
+        window.open(youtubeUrl, '_blank', 'noopener');
+      } else {
+        console.log('Brak trailera.');
+      }
+    } catch (error) {
+      console.error('Wystąpił błąd:', error);
+    }
+  });
+
+  return button;
 }
 
 // Funkcja do pobierania liczby wszystkich filmów
