@@ -32,6 +32,22 @@
         </li>
       </ul>
     </div>
+    <form class="header__pane-search-form visually-hidden">
+      <label class="header__search-form-lab">
+        <input
+          type="text"
+          name="searchQuery"
+          placeholder="Movie search"
+          class="header__search-form-input"
+          autocomplete="off"
+        />
+      </label>
+      <button class="header__serach-form-btn" type="submit">
+        <svg class="header__serach-form-icon">
+          <use href="/src/images/svg/icons.svg#search"></use>
+        </svg>
+      </button>
+    </form>
     <div class="toolbar-library container">
       <div class="theme-switch">
         <svg class="theme-switch__icon" role="img" aria-label="Sun incon">

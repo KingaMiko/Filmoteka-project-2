@@ -2,8 +2,8 @@
  * Główny plik dla stylów.
  * Wszystkie partials podłączamy tutaj.
  */
-
 // Style dla pliku z przykładem HTML fragmentu
+@import './utils/visually-hidden';
 @import './utils/reset';
 @import './utils/variables';
 @import './utils/container';
