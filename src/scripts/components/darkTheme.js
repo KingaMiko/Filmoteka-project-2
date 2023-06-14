@@ -12,8 +12,8 @@ const setTheme = darkTheme => {
     modalDarkTheme.classList.add('dark-theme');
   } else {
     bodyRef.classList.remove('dark-theme');
-    footerDarktheme.classList.add('dark-theme');
-    modalDarkTheme.classList.add('dark-theme');
+    footerDarktheme.classList.remove('dark-theme');
+    modalDarkTheme.classList.remove('dark-theme');
   }
 };
 
