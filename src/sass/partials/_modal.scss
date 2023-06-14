@@ -1,0 +1,54 @@
+.film-modal {
+    display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+    @media screen and (min-width: 388px){
+      align-items: start;
+    }
+    @media screen and (min-width: 352px) {
+        align-items: start;
+        padding: 0;
+      }
+    
+      @media screen and (min-width: 358px) {
+        align-items: start;
+      }
+    
+      @media screen and (min-width: 480px) {
+        align-items: start;
+      
+    }
+  }
+  .f-content {
+    width: auto;
+    padding: 48px 20px 40px;
+    background-color: $color-bcg-footer;
+    margin: auto 0 ;
+    position: relative;
+    @media screen and (min-width: 480px){
+      width: 440px;
+      
+    }
+    @media screen and (min-width: 769px){
+      width: 704px;
+      padding: 40px 72px 40px 36px;
+    }
+    &__btn-close{
+      width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 50;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    
+    }
+    &__wrap{
+      display: flex;
+    }
+    }
+    
