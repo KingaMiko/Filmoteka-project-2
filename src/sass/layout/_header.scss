@@ -287,3 +287,16 @@
   color: lightgrey;
   background-color: rgb(21, 21, 21);
 }
+
+.header__controls-item.current-home::after {
+  content: '';
+  position: absolute;
+  top: 80px;
+  right: 140px;
+
+  width: 35px;
+  height: 3px;
+  border-radius: 2px;
+
+  background-color: $color-link-underline;
+}
