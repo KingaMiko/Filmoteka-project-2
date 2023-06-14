@@ -57,7 +57,7 @@ export const teamList = [
         'https://ca.slack-edge.com/T04QXQQ7Q5R-U04S1AT0L1Y-g1123e776a36-512',
     },
     {
-      name: 'Piotr',
+      name: 'Piotr Białek',
       role: 'Developer',
       github: 'https://github.com/',
       linkedin: '',
