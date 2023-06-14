@@ -13,31 +13,42 @@ function loadIntoTeamModal(list) {
   const markup = list
     .map(member => {
       return `
-      <li class="member__card">
-        <div class="member__thumb">        
-            <img class="member__image" width='120' 
-            src="${member.photo}"
-            alt=${member.name}
-            loading="lazy"
-            />      
-        </div>
-        <div class="member__info">
-          <p class="member__name">${member.name}</p>
-          <a class="member__link member__link-git" 
-             href="${member.github}" 
-             target="_blank">github</a>
-             <a class="member__link" 
+      <li class="team-footer__card">
+      <img class="team-footer__foto" 
+      src="${member.photo}"
+      alt=${member.name}
+      loading="lazy">
+      <div class="about-footer">
+      <p class="footer-text__big">${member.name}</p>
+      <p class="footer-text__small">${member.role ?? ''}</p>
+      <ul class="networks-footer list">
+      <li class="networks-footer__list">
+      <a class="networks-footer__link" 
+          href="${member.github}" 
+          target="_blank"> 
+          <svg class="networks-footer__icon>
+          <use href="./images/svg/icons.svg#heart"></use>
+        </svg>
+      </a>
+      <a class="networks-footer__link" 
           href="${member.linkedin}" 
-          target="_blank">linkedin</a>
-          <p class="member__role">${member.role ?? ''}</p>
-        </div>
-      </li>`;
+          target="_blank">  
+        <svg class="networks-footer__icon">
+          <use href="./images/svg/icons#icon-git-icon"></use>
+        </svg></a>
+      </li>
+      </ul>
+      </div>`;
     })
     .join('');
 
   refs.modalRef.innerHTML = '';
   refs.teamRef.innerHTML = markup;
+<<<<<<< HEAD
+  refs.closeModalButton.addEventListener('click', onCloseModal);
+=======
  
+>>>>>>> b0928eb972cec7f7808b82c0c8ec7f60ddf85b46
 }
 
 function onOpenModal(e) {

@@ -24,9 +24,11 @@
     "posthtml-include": "^1.7.4"
   },
   "dependencies": {
+    "@glidejs/glide": "^3.6.0",
     "api": "^5.0.8",
     "axios": "^1.4.0",
     "basiclightbox": "^5.0.4",
+    "glide": "^0.2.0",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "notiflix": "^3.2.6"
