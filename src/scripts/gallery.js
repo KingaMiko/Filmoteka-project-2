@@ -27,7 +27,7 @@ export async function createGallery(page = 1) {
       gallery.appendChild(card);
 
       const link = document.createElement('a');
-      link.href = `https://www.themoviedb.org/movie/${movie.id}`;
+      // link.href = `https://www.themoviedb.org/movie/${movie.id}`;
 
       const image = document.createElement('img');
       image.classList.add('card__pic');
