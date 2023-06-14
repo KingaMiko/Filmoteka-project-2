@@ -108,3 +108,15 @@
     left: -30px;
   }
 }
+.header__controls-item.current::after {
+  content: '';
+  position: absolute;
+  top: 80px;
+  right: 279px;
+
+  width: 67px;
+  height: 3px;
+  border-radius: 2px;
+
+  background-color: $color-link-underline;
+}
