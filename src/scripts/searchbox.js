@@ -8,7 +8,7 @@ const searchBox = document.querySelector('.header__search-form-input');
 const searchForm = document.querySelector('.header__pane-search-form');
 const gallery = document.querySelector('.gallery');
 
-async function findMovie(e) {
+export async function findMovie(e) {
   e.preventDefault();
   const searchQuery = searchBox.value.trim();
   if (searchQuery === '') {
