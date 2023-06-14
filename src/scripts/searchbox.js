@@ -66,6 +66,9 @@ async function findMovie(e) {
       const displayedGenres = movieGenres.slice(0, maxGenres);
       subtitle.textContent = `${displayedGenres.join(', ')} | ${year}`;
 
+      const trailerButton = createTrailerButton(movie.id);
+      link.appendChild(trailerButton);
+
       info.appendChild(title);
       info.appendChild(subtitle);
 
@@ -116,5 +119,6 @@ function showNoResultsMessage() {
   noResultsMessage.classList.add('no-results');
   gallery.appendChild(noResultsMessage);
 }
-createTrailerButton(movieId);
+
+createTrailerButton();
 searchForm.addEventListener('submit', findMovie);
