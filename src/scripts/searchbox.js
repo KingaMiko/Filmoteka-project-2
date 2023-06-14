@@ -1,6 +1,7 @@
 import { API_KEY } from './api-service';
 import Notiflix from 'notiflix';
 import { createGallery, createTrailerButton } from './gallery';
+import debounce from 'lodash/debounce';
 
 const MOVIES_PATH = 'https://api.themoviedb.org/3/search/movie';
 const GENRES_PATH = 'https://api.themoviedb.org/3/genre/movie/list';
@@ -8,8 +9,10 @@ const searchBox = document.querySelector('.header__search-form-input');
 const searchForm = document.querySelector('.header__pane-search-form');
 const gallery = document.querySelector('.gallery');
 
-export async function findMovie(e) {
-  e.preventDefault();
+let debounceTimeout;
+let lastSearchQuery = '';
+
+export async function findMovie() {
   const searchQuery = searchBox.value.trim();
   if (searchQuery === '') {
     Notiflix.Notify.warning('The field cannot be empty. Enter correct movie title');
@@ -86,28 +89,28 @@ export async function findMovie(e) {
   }
 }
 
-async function searchMovies(query) {
-  const url = `${MOVIES_PATH}?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=1`;
-  const response = await fetch(url);
-  if (!response.ok) {
-    Notiflix.Notify.failure(
-      'Search result not successful. Enter the correct movie name and try again',
-    );
-  }
-  const data = await response.json();
-  return data.results;
+function searchMovies(query) {
+  const url = `${MOVIES_PATH}?api_key=${API_KEY}&query=${encodeURIComponent(query)}`;
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Search result not successful. Enter the correct movie name and try again');
+      }
+      return response.json();
+    })
+    .then(data => data.results);
 }
 
-async function fetchGenres() {
+function fetchGenres() {
   const url = `${GENRES_PATH}?api_key=${API_KEY}`;
-  const response = await fetch(url);
-  if (!response.ok) {
-    Notiflix.Notify.failure(
-      'Search result not successful. Enter the correct movie name and try again',
-    );
-  }
-  const data = await response.json();
-  return data.genres;
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Search result not successful. Enter the correct movie name and try again');
+      }
+      return response.json();
+    })
+    .then(data => data.genres);
 }
 
 function clearMovies() {
@@ -120,5 +123,27 @@ function showNoResultsMessage() {
   gallery.appendChild(noResultsMessage);
 }
 
+function handleSearch() {
+  const searchQuery = searchBox.value.trim();
+  if (searchQuery === lastSearchQuery) {
+    return;
+  }
+
+  lastSearchQuery = searchQuery;
+
+  clearTimeout(debounceTimeout);
+
+  if (searchQuery === '') {
+    clearMovies();
+    createGallery();
+    return;
+  }
+
+  debounceTimeout = setTimeout(() => {
+    findMovie();
+  }, 300);
+}
+
 createTrailerButton();
-searchForm.addEventListener('submit', findMovie);
+searchBox.addEventListener('input', debounce(handleSearch, 1000));
+searchForm.addEventListener('submit', e => e.preventDefault());
