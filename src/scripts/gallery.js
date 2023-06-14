@@ -14,7 +14,7 @@ async function fetchMovies(page, itemsPerPage) {
 }
 
 // Funkcja do tworzenia galerii filmów
-async function createGallery(page = 1) {
+export async function createGallery(page = 1) {
   try {
     const movies = await fetchMovies(page, itemsPerPage);
 
