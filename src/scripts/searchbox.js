@@ -28,7 +28,6 @@ export async function findMovie() {
       );
       clearMovies();
       showNoResultsMessage();
-      searchBox.value = '';
       return;
     }
 
@@ -84,8 +83,6 @@ export async function findMovie() {
     Notiflix.Notify.failure(
       'Search result not successful. Enter the correct movie name and try again',
     );
-  } finally {
-    searchBox.value = '';
   }
 }
 
@@ -145,5 +142,5 @@ function handleSearch() {
 }
 
 createTrailerButton();
-searchBox.addEventListener('input', debounce(handleSearch, 1000));
+searchBox.addEventListener('input', debounce(handleSearch, 300));
 searchForm.addEventListener('submit', e => e.preventDefault());
