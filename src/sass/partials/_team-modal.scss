@@ -182,7 +182,8 @@ body.show-modal {
     }
     &:hover,
     &:focus {
-      background-color: rgba(188, 12, 12, 0.55);
+      background-color: rgba(188, 12, 12, 0.7);
+      fill: white;
     }
   }
 
