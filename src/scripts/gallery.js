@@ -1,6 +1,7 @@
 import { API_KEY } from './api-service';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
@@ -123,21 +124,28 @@ async function fetchYoutube(movieId) {
 
 async function openLightbox(url) {
   try {
+    Loading.pulse({
+      svgColor: 'red',
+    });
+
     const instance = basicLightbox.create(
-      `<button type="button" id="youtube-close-btn" class="modal__btn-close"><i class="fa-regular fa-circle-xmark"></i></button><iframe
+      `<button type="button" id="youtube-close-btn" class="modal__btn-close"></button><iframe
         src="${url}"?autoplay=1&mute=1&controls=1>
         </iframe>
       `,
       {
         onShow: instance => {
-          instance.element().querySelector('#youtube-close-btn').onclick = instance.close;
+          instance.element().querySelector('#youtube-close-btn').onclick = () => {
+            instance.close();
+            Loading.remove();
+          };
         },
       },
     );
-
+    Loading.remove();
     instance.show();
   } catch (error) {
-    console.error('Wystąpił błąd:', error);
+    Notiflix.Notify.Failure('An error occurred while opening the lightbox.');
   }
 }
 
