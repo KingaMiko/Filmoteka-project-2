@@ -152,4 +152,3 @@ createTrailerButton();
 
 searchBox.addEventListener('input', debounce(handleSearch, 300));
 searchForm.addEventListener('submit', e => e.preventDefault());
-buildModalContent();
