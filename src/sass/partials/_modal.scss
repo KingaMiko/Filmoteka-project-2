@@ -127,13 +127,13 @@
   border-radius: 5px;
   background-color: white;
   cursor: pointer;
-  // border: 1px solid $primary-text-color;
+  border: 1px solid $color-body;
   // transition: all $transition-duration $timing-function;
   &:hover,
   &:focus {
-    background-color: red;
-    // color: $white-text-color;
-    // border: 1px solid $accent-color;
+    background-color: $color-accent;
+    color: white;
+    border: 1px solid $color-accent;
   }
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     width: 125px;

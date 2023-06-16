@@ -1,7 +1,6 @@
 import { API_KEY } from './api-service';
 import Notiflix from 'notiflix';
 import { createGallery, createTrailerButton } from './gallery';
-import { buildModalContent } from './modal';
 import debounce from 'lodash/debounce';
 import { openModal } from './movie-modal';
 
