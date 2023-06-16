@@ -9,4 +9,6 @@ import './scripts/searchbox';
 import './scripts/components/darkTheme';
 import './scripts/team';
 import './scripts/team-modal';
-//import './scripts/modal';
+
+import './scripts/pagination';
+

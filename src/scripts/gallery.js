@@ -28,7 +28,7 @@ export async function createGallery(page = 1) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Wyczyść galerię przed dodaniem nowych filmów
 
-    movies.forEach((movie) => {
+    movies.forEach(movie => {
       const card = document.createElement('div');
       card.classList.add('card');
       gallery.appendChild(card);
@@ -81,7 +81,7 @@ export async function createGallery(page = 1) {
       centerAlign: true,
     });
 
-    pagination.on('afterMove', async (e) => {
+    pagination.on('afterMove', async e => {
       currentPage = e.page;
       await createGallery(currentPage);
     });
