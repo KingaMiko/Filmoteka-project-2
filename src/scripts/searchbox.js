@@ -2,6 +2,7 @@ import { API_KEY } from './api-service';
 import Notiflix from 'notiflix';
 import { createGallery, createTrailerButton } from './gallery';
 import debounce from 'lodash/debounce';
+import { openModal } from './movie-modal';
 
 const MOVIES_PATH = 'https://api.themoviedb.org/3/search/movie';
 const GENRES_PATH = 'https://api.themoviedb.org/3/genre/movie/list';
@@ -53,6 +54,10 @@ export async function findMovie() {
 
       const info = document.createElement('div');
       info.classList.add('card__info');
+
+      image.addEventListener('click', function () {
+        openModal(movie);
+      });
 
       const title = document.createElement('h2');
       title.textContent = movie.title;
@@ -143,5 +148,6 @@ function handleSearch() {
 }
 
 createTrailerButton();
+
 searchBox.addEventListener('input', debounce(handleSearch, 300));
 searchForm.addEventListener('submit', e => e.preventDefault());
