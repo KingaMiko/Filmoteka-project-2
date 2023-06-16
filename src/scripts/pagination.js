@@ -1,14 +1,14 @@
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
-import '../css/pagination.css';
-import getPopular from './getPopularMovies';
+import '../sass/main.scss';
+
 const TUI_VISIBLE_PAGES = 5;
 
 const container = document.querySelector('#pagination');
 
 export function createPagination(totalItems, visiblePages) {
   const options = {
-    itemsPerPage: 40,
+    itemsPerPage: 20,
     totalItems: totalItems,
     visiblePages: visiblePages < 5 ? visiblePages : TUI_VISIBLE_PAGES,
   };
@@ -23,3 +23,4 @@ export function createPagination(totalItems, visiblePages) {
 
   return pagination;
 }
+
