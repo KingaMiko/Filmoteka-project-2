@@ -29,6 +29,8 @@
     "axios": "^1.4.0",
     "basiclightbox": "^5.0.4",
     "glide": "^0.2.0",
+    "i18next": "^23.1.0",
+    "i18next-browser-languagedetector": "^7.0.2",
     "lightbox": "^0.5.0",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",

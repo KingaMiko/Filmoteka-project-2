@@ -8,7 +8,9 @@ import './scripts/components/backToTop';
 import './scripts/searchbox';
 import './scripts/components/darkTheme';
 import './scripts/team';
-import './scripts/team-modal';
+import './scripts/teamModal';
 //import './scripts/loader';
 
 // import './scripts/trailer';
+import './scripts/changeLang';
+import './scripts/packageLang';
