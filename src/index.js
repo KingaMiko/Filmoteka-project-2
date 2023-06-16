@@ -10,5 +10,5 @@ import './scripts/components/darkTheme';
 import './scripts/team';
 import './scripts/team-modal';
 
-import './scripts/pagination';
+
 
