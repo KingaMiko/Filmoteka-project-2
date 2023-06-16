@@ -5,6 +5,8 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import { openModal } from './movie-modal';
+import { fetchYoutube, openLightbox } from './trailer.js';
+
 
 const itemsPerPage = 10; // liczba filmów wyświetlanych na stronie
 let currentPage = 1; // aktualna strona
@@ -26,7 +28,7 @@ export async function createGallery(page = 1) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Wyczyść galerię przed dodaniem nowych filmów
 
-    movies.forEach(movie => {
+    movies.forEach((movie) => {
       const card = document.createElement('div');
       card.classList.add('card');
       gallery.appendChild(card);
@@ -79,12 +81,13 @@ export async function createGallery(page = 1) {
       centerAlign: true,
     });
 
-    pagination.on('afterMove', async e => {
+    pagination.on('afterMove', async (e) => {
       currentPage = e.page;
       await createGallery(currentPage);
     });
   } catch (error) {
-    console.error('Wystąpił błąd:', error);
+    // console.error('Wystąpił błąd:', error);
+    Notiflix.Notify.Failure(`Wystąpił błąd: ${error.message}`);
   }
 }
 
@@ -101,58 +104,17 @@ export function createTrailerButton(movieId) {
         const youtubeUrl = `https://www.youtube.com/embed/${trailerKey}`;
         openLightbox(youtubeUrl);
       } else {
-        console.log('Brak trailera.');
+        // console.log('Brak trailera.');
+        Notiflix.Notify.Failure('Brak trailera.')
       }
     } catch (error) {
-      console.error('Wystąpił błąd:', error);
+      // console.error('Wystąpił błąd:', error);
+      Notiflix.Notify.Failure(`Wystąpił błąd: ${error.message}`);
     }
   });
   return button;
 }
 
-async function fetchYoutube(movieId) {
-  try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`,
-    );
-    if (!response.ok) {
-      Notiflix.Notify.Failure('Failed to fetch data from the server.');
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
-  }
-}
-
-async function openLightbox(url) {
-  try {
-    Loading.pulse({
-      svgColor: 'red',
-    });
-
-    const instance = basicLightbox.create(
-      `<button type="button" id="youtube-close-btn" class="modal__btn-close"></button><iframe
-        src="${url}"?autoplay=1&mute=1&controls=1>
-        </iframe>
-      `,
-      {
-        onShow: instance => {
-          instance.element().querySelector('#youtube-close-btn').onclick = () => {
-            instance.close();
-            Loading.remove();
-          };
-        },
-      },
-    );
-    Loading.remove();
-    instance.show();
-  } catch (error) {
-    Notiflix.Notify.Failure('An error occurred while opening the lightbox.');
-  }
-}
-
-// Funkcja do pobierania liczby wszystkich filmów
 async function fetchTotalMoviesCount() {
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
@@ -161,5 +123,4 @@ async function fetchTotalMoviesCount() {
   return data.total_results;
 }
 
-// Inicjalizacja galerii po załadowaniu strony
 createGallery();
