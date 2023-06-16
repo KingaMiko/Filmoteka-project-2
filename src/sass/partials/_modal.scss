@@ -42,7 +42,10 @@
 }
 
 .modal-content {
-  display: flex;
+  display: block;
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
 }
 .image {
   margin-right: auto;
