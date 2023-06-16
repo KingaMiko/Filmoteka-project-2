@@ -2,6 +2,7 @@ import { API_KEY } from './api-service';
 import Notiflix from 'notiflix';
 import { createGallery, createTrailerButton } from './gallery';
 import debounce from 'lodash/debounce';
+import Pagination from 'tui-pagination';
 
 const MOVIES_PATH = 'https://api.themoviedb.org/3/search/movie';
 const GENRES_PATH = 'https://api.themoviedb.org/3/genre/movie/list';
@@ -13,7 +14,7 @@ const paginationContainer = document.querySelector('#pagination-container');
 let debounceTimeout;
 let lastSearchQuery = '';
 
-export async function findMovie() {
+export async function findMovie(page = 1) {
   const searchQuery = searchBox.value.trim();
   if (searchQuery === '') {
     Notiflix.Notify.warning('The field cannot be empty. Enter correct movie title');
@@ -22,7 +23,7 @@ export async function findMovie() {
     return;
   }
   try {
-    const movies = await searchMovies(searchQuery);
+    const movies = await searchMovies(searchQuery, page);
     if (movies.length === 0) {
       Notiflix.Notify.warning(
         'Search result not successful. Enter the correct movie name and try again',
@@ -80,6 +81,23 @@ export async function findMovie() {
 
       card.appendChild(link);
     });
+
+    // Inicjalizacja paginacji
+    const totalItems = movies.length;
+    const itemsPerPage = 10; // liczba filmów wyświetlanych na stronie
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    const pagination = new Pagination(paginationContainer, {
+      totalItems,
+      itemsPerPage,
+      visiblePages: 5,
+      page,
+      centerAlign: true,
+    });
+
+    pagination.on('afterMove', async e => {
+      await findMovie(e.page);
+    });
   } catch (error) {
     Notiflix.Notify.failure(
       'Search result not successful. Enter the correct movie name and try again',
@@ -87,8 +105,8 @@ export async function findMovie() {
   }
 }
 
-function searchMovies(query) {
-  const url = `${MOVIES_PATH}?api_key=${API_KEY}&query=${encodeURIComponent(query)}`;
+function searchMovies(query, page) {
+  const url = `${MOVIES_PATH}?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${page}`;
   return fetch(url)
     .then(response => {
       if (!response.ok) {
@@ -142,6 +160,6 @@ function handleSearch() {
   }, 300);
 }
 
-createTrailerButton();
+createGallery();
 searchBox.addEventListener('input', debounce(handleSearch, 300));
 searchForm.addEventListener('submit', e => e.preventDefault());
