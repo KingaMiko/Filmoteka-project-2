@@ -1,18 +1,20 @@
 import { API_KEY } from './api-service';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
-import * as basicLightbox from 'basiclightbox';
-import 'basiclightbox/dist/basicLightbox.min.css';
-import { openModal } from './movie-modal';
+
 import { fetchYoutube, openLightbox } from './trailer.js';
 
+const ITEMS_PER_PAGE = 10; // liczba filmów wyświetlanych na stronie
+const paginationContainer = document.querySelector('#pagination-container');
+let currentPage = 1;
 
-const itemsPerPage = 10; // liczba filmów wyświetlanych na stronie
-let currentPage = 1; // aktualna strona
+
+import { openModal } from './movie-modal';
+
+
 
 // Funkcja do pobierania filmów z API TMDB
-async function fetchMovies(page, itemsPerPage) {
+async function fetchMovies(page) {
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&page=${page}`,
   );
@@ -20,10 +22,19 @@ async function fetchMovies(page, itemsPerPage) {
   return data.results;
 }
 
+// Funkcja do pobierania całkowitej liczby filmów
+async function fetchTotalMoviesCount() {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
+  );
+  const data = await response.json();
+  return data.total_results;
+}
+
 // Funkcja do tworzenia galerii filmów
-export async function createGallery(page = 1) {
+export async function createGallery() {
   try {
-    const movies = await fetchMovies(page, itemsPerPage);
+    const movies = await fetchMovies(currentPage);
 
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Wyczyść galerię przed dodaniem nowych filmów
@@ -68,25 +79,21 @@ export async function createGallery(page = 1) {
 
     // Inicjalizacja paginacji
     const totalItems = await fetchTotalMoviesCount();
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-    const paginationContainer = document.getElementById('pagination-container');
-    paginationContainer.innerHTML = ''; // Wyczyść kontener paginacji przed inicjalizacją
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
     const pagination = new Pagination(paginationContainer, {
       totalItems,
-      itemsPerPage,
+      itemsPerPage: ITEMS_PER_PAGE,
       visiblePages: 5,
-      page,
+      page: currentPage,
       centerAlign: true,
     });
 
     pagination.on('afterMove', async e => {
       currentPage = e.page;
-      await createGallery(currentPage);
+      await createGallery();
     });
   } catch (error) {
-    // console.error('Wystąpił błąd:', error);
     Notiflix.Notify.Failure(`Wystąpił błąd: ${error.message}`);
   }
 }
@@ -101,26 +108,14 @@ export function createTrailerButton(movieId) {
       const youtubeData = await fetchYoutube(movieId);
       if (youtubeData.results.length > 0) {
         const trailerKey = youtubeData.results[0].key;
-        const youtubeUrl = `https://www.youtube.com/embed/${trailerKey}`;
+        const youtubeUrl = `https://www.youtube.com/watch?v=${trailerKey}`;
         openLightbox(youtubeUrl);
       } else {
-        // console.log('Brak trailera.');
-        Notiflix.Notify.Failure('Brak trailera.')
+        Notiflix.Notify.Warning('Nie znaleziono trailera dla tego filmu.');
       }
     } catch (error) {
-      // console.error('Wystąpił błąd:', error);
       Notiflix.Notify.Failure(`Wystąpił błąd: ${error.message}`);
     }
   });
   return button;
 }
-
-async function fetchTotalMoviesCount() {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
-  );
-  const data = await response.json();
-  return data.total_results;
-}
-
-createGallery();
