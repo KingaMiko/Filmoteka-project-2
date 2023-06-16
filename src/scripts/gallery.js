@@ -4,6 +4,7 @@ import Notiflix from 'notiflix';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const itemsPerPage = 10; // liczba filmów wyświetlanych na stronie
 let currentPage = 1; // aktualna strona
@@ -84,6 +85,8 @@ export async function createGallery(page = 1) {
   }
 }
 
+// TRAILER
+
 export function createTrailerButton(movieId) {
   const button = document.createElement('button');
   button.classList.add('card', 'trailer-button');
@@ -97,10 +100,10 @@ export function createTrailerButton(movieId) {
         const youtubeUrl = `https://www.youtube.com/embed/${trailerKey}`;
         openLightbox(youtubeUrl);
       } else {
-        console.log('Brak trailera.');
+        Report.warning('Video not found', `There is no trailer to display`, 'Ok');
       }
     } catch (error) {
-      console.error('Wystąpił błąd:', error);
+      Report.failure('ERROR', `${error.message}`, 'Ok');
     }
   });
 
@@ -129,16 +132,18 @@ async function openLightbox(url) {
     });
 
     const instance = basicLightbox.create(
-      `<button type="button" id="youtube-close-btn" class="modal__btn-close"></button><iframe
+      `<button type="button" id="youtube-close-btn" class="modal__btn-close">X</button><iframe
         src="${url}"?autoplay=1&mute=1&controls=1>
-        </iframe>
-      `,
+        </iframe>`,
       {
         onShow: instance => {
           instance.element().querySelector('#youtube-close-btn').onclick = () => {
             instance.close();
             Loading.remove();
           };
+          document.body.addEventListener('keydown', e => {
+            if (e.key === 'Escape') instance.close();
+          });
         },
       },
     );
@@ -147,7 +152,13 @@ async function openLightbox(url) {
   } catch (error) {
     Notiflix.Notify.Failure('An error occurred while opening the lightbox.');
   }
+
+  // const xButton = document.createElement('button');
+  // xButton.classList.add('modal__btn-close');
+  // xButton.innerHTML = 'X';
 }
+
+// KONIEC TRAILERA
 
 // Funkcja do pobierania liczby wszystkich filmów
 async function fetchTotalMoviesCount() {
