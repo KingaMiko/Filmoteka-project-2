@@ -202,8 +202,8 @@
   top: 110px;
 
   @media screen and (min-width: 768px) {
-    top: 90px;
-    left: -30px;
+    top: 92px;
+    left: -100px;
   }
 }
 
@@ -286,4 +286,38 @@
 .dark-theme {
   color: lightgrey;
   background-color: rgb(21, 21, 21);
+}
+
+.header__controls-item.current-home::after {
+  content: '';
+  position: absolute;
+  top: 68px;
+  right: 128px;
+
+  width: 35px;
+  height: 3px;
+  border-radius: 2px;
+
+  background-color: $color-link-underline;
+
+  @media screen and (min-width: 768px) {
+    top: 80px;
+    right: 140px;
+  }
+  @media screen and (min-width: 1280px) {
+    top: 80px;
+    right: 140px;
+  }
+}
+
+.header__container-select {
+  position: absolute;
+  right: 65px;
+  top: 105px;
+}
+
+.header__genre {
+  position: relative;
+  left: 0px;
+  top: 50px;
 }

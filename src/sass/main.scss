@@ -10,9 +10,21 @@
 @import './layout/header';
 @import './partials/_pagination';
 @import './layout/header-library';
+<<<<<<< HEAD
 @import './partials/main-content';
+=======
+//@import './partials/main-content';
+>>>>>>> a285b6f8ce31a801ebc2736603d1f13ba472ccf9
 @import './layout/footer';
+@import './partials/backdrop';
+@import './partials/modal';
 @import './layout/gallery';
 @import './partials/typography';
 @import './partials/backToTop';
+<<<<<<< HEAD
 @import './partials/team-modal';
+=======
+@import './partials/team-modal';
+@import './partials/pagination';
+//@import './partials/loader';
+>>>>>>> a285b6f8ce31a801ebc2736603d1f13ba472ccf9

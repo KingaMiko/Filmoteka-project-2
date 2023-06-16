@@ -1,5 +1,12 @@
 import { API_KEY } from './api-service';
 import Pagination from 'tui-pagination';
+import Notiflix from 'notiflix';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
+import { openModal } from './movie-modal';
+import { fetchYoutube, openLightbox } from './trailer.js';
+
 
 const itemsPerPage = 10; // liczba filmów wyświetlanych na stronie
 let currentPage = 1; // aktualna strona
@@ -21,17 +28,20 @@ export async function createGallery(page = 1) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Wyczyść galerię przed dodaniem nowych filmów
 
-    movies.forEach(movie => {
+    movies.forEach((movie) => {
       const card = document.createElement('div');
       card.classList.add('card');
       gallery.appendChild(card);
 
       const link = document.createElement('a');
-      link.href = `https://www.themoviedb.org/movie/${movie.id}`;
+      //link.href = `https://www.themoviedb.org/movie/${movie.id}`;
 
       const image = document.createElement('img');
       image.classList.add('card__pic');
       image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+      image.addEventListener('click', function () {
+        openModal(movie);
+      });
 
       const info = document.createElement('div');
       info.classList.add('card__info');
@@ -71,12 +81,13 @@ export async function createGallery(page = 1) {
       centerAlign: true,
     });
 
-    pagination.on('afterMove', async e => {
+    pagination.on('afterMove', async (e) => {
       currentPage = e.page;
       await createGallery(currentPage);
     });
   } catch (error) {
-    console.error('Wystąpił błąd:', error);
+    // console.error('Wystąpił błąd:', error);
+    Notiflix.Notify.Failure(`Wystąpił błąd: ${error.message}`);
   }
 }
 
@@ -87,25 +98,23 @@ export function createTrailerButton(movieId) {
 
   button.addEventListener('click', async () => {
     try {
-      const movieDetails = await fetchMovieDetails(movieId);
-
-      const trailer = movieDetails.videos.results.find(video => video.type === 'Trailer');
-
-      if (trailer) {
-        const youtubeUrl = `https://www.youtube.com/watch?v=${trailer.key}`;
-        window.open(youtubeUrl, '_blank', 'noopener');
+      const youtubeData = await fetchYoutube(movieId);
+      if (youtubeData.results.length > 0) {
+        const trailerKey = youtubeData.results[0].key;
+        const youtubeUrl = `https://www.youtube.com/embed/${trailerKey}`;
+        openLightbox(youtubeUrl);
       } else {
-        console.log('Brak trailera.');
+        // console.log('Brak trailera.');
+        Notiflix.Notify.Failure('Brak trailera.')
       }
     } catch (error) {
-      console.error('Wystąpił błąd:', error);
+      // console.error('Wystąpił błąd:', error);
+      Notiflix.Notify.Failure(`Wystąpił błąd: ${error.message}`);
     }
   });
-
   return button;
 }
 
-// Funkcja do pobierania liczby wszystkich filmów
 async function fetchTotalMoviesCount() {
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
@@ -114,5 +123,4 @@ async function fetchTotalMoviesCount() {
   return data.total_results;
 }
 
-// Inicjalizacja galerii po załadowaniu strony
 createGallery();
