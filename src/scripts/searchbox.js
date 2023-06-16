@@ -4,6 +4,8 @@ import { createGallery, createTrailerButton } from './gallery';
 import debounce from 'lodash/debounce';
 import Pagination from 'tui-pagination';
 
+import { openModal } from './movie-modal';
+
 const MOVIES_PATH = 'https://api.themoviedb.org/3/search/movie';
 const GENRES_PATH = 'https://api.themoviedb.org/3/genre/movie/list';
 const searchBox = document.querySelector('.header__search-form-input');
@@ -54,6 +56,10 @@ export async function findMovie(page = 1) {
 
       const info = document.createElement('div');
       info.classList.add('card__info');
+
+      image.addEventListener('click', function () {
+        openModal(movie);
+      });
 
       const title = document.createElement('h2');
       title.textContent = movie.title;
@@ -160,6 +166,11 @@ function handleSearch() {
   }, 300);
 }
 
+
 createGallery();
+
+createTrailerButton();
+
+
 searchBox.addEventListener('input', debounce(handleSearch, 300));
 searchForm.addEventListener('submit', e => e.preventDefault());

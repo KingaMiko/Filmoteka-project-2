@@ -1,11 +1,17 @@
 import { API_KEY } from './api-service';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
+
 import { fetchYoutube, openLightbox } from './trailer.js';
 
 const ITEMS_PER_PAGE = 10; // liczba filmów wyświetlanych na stronie
 const paginationContainer = document.querySelector('#pagination-container');
 let currentPage = 1;
+
+
+import { openModal } from './movie-modal';
+
+
 
 // Funkcja do pobierania filmów z API TMDB
 async function fetchMovies(page) {
@@ -44,6 +50,9 @@ export async function createGallery() {
       const image = document.createElement('img');
       image.classList.add('card__pic');
       image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+      image.addEventListener('click', function () {
+        openModal(movie);
+      });
 
       const info = document.createElement('div');
       info.classList.add('card__info');
@@ -108,6 +117,5 @@ export function createTrailerButton(movieId) {
       Notiflix.Notify.Failure(`Wystąpił błąd: ${error.message}`);
     }
   });
-
   return button;
 }
