@@ -8,6 +8,7 @@ const GENRES_PATH = 'https://api.themoviedb.org/3/genre/movie/list';
 const searchBox = document.querySelector('.header__search-form-input');
 const searchForm = document.querySelector('.header__pane-search-form');
 const gallery = document.querySelector('.gallery');
+const paginationContainer = document.querySelector('#pagination-container');
 
 let debounceTimeout;
 let lastSearchQuery = '';
