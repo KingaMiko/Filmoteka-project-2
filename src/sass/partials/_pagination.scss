@@ -47,9 +47,15 @@
     border-radius: 5%;
 }
 
-.tui-pagination .tui-first-child.tui-is-selected,
-.tui-pagination strong.tui-first-child {
-    margin-left: 0
+.tui-pagination .tui-next,
+.tui-pagination .tui-last,
+.tui-pagination .tui-first,
+.tui-pagination .tui-prev,
+.tui-pagination .tui-prev-is-ellip,
+.tui-pagination .tui-next-is-ellip,
+.tui-first-child-is-selected:hover {
+    margin-left: 0;
+    background-color: #ffffff;
 }
 
 .tui-pagination .tui-first,
@@ -107,7 +113,7 @@
 .tui-pagination .tui-ico-next {
     width: 6px;
     height: 10px;
-    background-position: -13px -24px
+    background-position: -13px -24px;
 }
 
 .tui-pagination .tui-ico-last {
