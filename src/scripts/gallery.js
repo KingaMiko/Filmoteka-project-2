@@ -4,6 +4,7 @@ import Notiflix from 'notiflix';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
+import { openModal } from './movie-modal';
 
 const itemsPerPage = 10; // liczba filmów wyświetlanych na stronie
 let currentPage = 1; // aktualna strona
@@ -36,6 +37,9 @@ export async function createGallery(page = 1) {
       const image = document.createElement('img');
       image.classList.add('card__pic');
       image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+      image.addEventListener('click', function () {
+        openModal(movie);
+      });
 
       const info = document.createElement('div');
       info.classList.add('card__info');
@@ -103,7 +107,6 @@ export function createTrailerButton(movieId) {
       console.error('Wystąpił błąd:', error);
     }
   });
-
   return button;
 }
 

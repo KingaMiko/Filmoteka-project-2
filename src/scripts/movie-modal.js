@@ -1,0 +1,179 @@
+//import { Loading } from 'notiflix/build/notiflix-loading-aio';
+const modalBackdrop = document.querySelector('.modal__backdrop');
+const modalContainer = document.querySelector('.modal__container');
+
+function buildModalContent(movie) {
+  const content = document.createElement('div');
+  content.classList.add('modal-content');
+
+  const closeButton = document.createElement('button');
+  closeButton.type = 'button';
+  closeButton.classList.add('close__button');
+  closeButton.dataset.action = 'close-modal';
+  closeButton.innerHTML = '&times;';
+  content.appendChild(closeButton);
+
+  const filmImageContainer = document.createElement('div');
+  filmImageContainer.classList.add('film__image');
+
+  const image = document.createElement('img');
+  image.classList.add('image');
+  if (movie.poster_path) {
+    image.src = `https://www.themoviedb.org/t/p/w500${movie.poster_path}`;
+    image.onerror = function () {
+      this.onerror = null;
+      this.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
+    };
+    image.alt = movie.title;
+    image.title = movie.title;
+  } else {
+    image.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
+    image.alt = 'film photo';
+  }
+  filmImageContainer.appendChild(image);
+  content.appendChild(filmImageContainer);
+
+  const filmInformationContainer = document.createElement('div');
+  filmInformationContainer.classList.add('film__information');
+
+  const div1 = document.createElement('div');
+
+  const titleContainer = document.createElement('h2');
+  titleContainer.classList.add('film__title');
+  titleContainer.textContent = movie.title;
+  div1.appendChild(titleContainer);
+
+  const ul = document.createElement('ul');
+
+  const voteVotes = document.createElement('li');
+  voteVotes.classList.add('film__item');
+  const voteVotesDetails = document.createElement('p');
+  voteVotesDetails.classList.add('film__details');
+  voteVotesDetails.textContent = 'Vote / Votes';
+  const voteVotesInfo = document.createElement('p');
+  voteVotesInfo.classList.add('film__info--uper');
+  const voteAverage = document.createElement('span');
+  voteAverage.classList.add('film__rating--orange');
+  voteAverage.textContent = movie.vote_average;
+  const voteDivider = document.createElement('span');
+  voteDivider.classList.add('film__rating--divider');
+  voteDivider.textContent = ' / ';
+  const voteCount = document.createElement('span');
+  voteCount.textContent = movie.vote_count;
+  voteVotesInfo.appendChild(voteAverage);
+  voteVotesInfo.appendChild(voteDivider);
+  voteVotesInfo.appendChild(voteCount);
+  voteVotes.appendChild(voteVotesDetails);
+  voteVotes.appendChild(voteVotesInfo);
+  ul.appendChild(voteVotes);
+
+  const popularity = document.createElement('li');
+  popularity.classList.add('film__item');
+  const popularityDetails = document.createElement('p');
+  popularityDetails.classList.add('film__details');
+  popularityDetails.textContent = 'Popularity';
+  const popularityInfo = document.createElement('p');
+  popularityInfo.classList.add('film__info--uper');
+  popularityInfo.textContent = movie.popularity;
+  popularity.appendChild(popularityDetails);
+  popularity.appendChild(popularityInfo);
+  ul.appendChild(popularity);
+
+  const originalTitle = document.createElement('li');
+  originalTitle.classList.add('film__item');
+  const originalTitleDetails = document.createElement('p');
+  originalTitleDetails.classList.add('film__details');
+  originalTitleDetails.textContent = 'Original title';
+  const originalTitleInfo = document.createElement('p');
+  originalTitleInfo.textContent = movie.original_title;
+  originalTitle.appendChild(originalTitleDetails);
+  originalTitle.appendChild(originalTitleInfo);
+  ul.appendChild(originalTitle);
+
+  const genre = document.createElement('li');
+  genre.classList.add('film__item');
+  const genreDetails = document.createElement('p');
+  genreDetails.classList.add('film__details');
+  genreDetails.textContent = 'Genre';
+  const genreInfo = document.createElement('p');
+  genreInfo.classList.add('film__info');
+  if (movie.genres) {
+    movie.genres.forEach((genre, index) => {
+      const genreSpan = document.createElement('span');
+      genreSpan.textContent = genre.name;
+      genreInfo.appendChild(genreSpan);
+      if (index !== movie.genres.length - 1) {
+        const commaSpan = document.createElement('span');
+        commaSpan.textContent = ', ';
+        genreInfo.appendChild(commaSpan);
+      }
+    });
+  } else {
+    const genreSpan = document.createElement('span');
+    genreSpan.textContent = 'N/A';
+    genreInfo.appendChild(genreSpan);
+  }
+  genre.appendChild(genreDetails);
+  genre.appendChild(genreInfo);
+  ul.appendChild(genre);
+
+  div1.appendChild(ul);
+  filmInformationContainer.appendChild(div1);
+
+  const div2 = document.createElement('div');
+  const aboutTitle = document.createElement('h3');
+  aboutTitle.classList.add('film__about__title');
+  aboutTitle.textContent = 'About';
+  const aboutText = document.createElement('p');
+  aboutText.classList.add('film__about__text');
+  aboutText.textContent = movie.overview;
+  div2.appendChild(aboutTitle);
+  div2.appendChild(aboutText);
+  filmInformationContainer.appendChild(div2);
+
+  content.appendChild(filmInformationContainer);
+
+  return content;
+}
+
+export function openModal(movie) {
+  const modalContent = buildModalContent(movie);
+  modalContainer.innerHTML = '';
+  modalContainer.appendChild(modalContent);
+
+  modalBackdrop.style.display = 'flex';
+  document.body.classList.add('modal-open');
+
+  modalBackdrop.addEventListener('click', outsideClick);
+  document.addEventListener('keydown', escKeyPress);
+
+  const closeButton = document.querySelector('.close__button');
+  closeButton.addEventListener('click', closeModal);
+}
+
+function closeModal() {
+  modalBackdrop.style.display = 'none';
+  modalContainer.innerHTML = '';
+  modalBackdrop.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
+
+  modalBackdrop.removeEventListener('click', outsideClick);
+  document.removeEventListener('keydown', escKeyPress);
+
+  const closeButton = document.querySelector('.close__button');
+  if (closeButton) {
+    closeButton.removeEventListener('click', closeModal);
+  }
+}
+
+function outsideClick(event) {
+  if (event.target === modalBackdrop) {
+    closeModal();
+  }
+}
+
+function escKeyPress(event) {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+}
