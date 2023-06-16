@@ -131,6 +131,25 @@ function buildModalContent(movie) {
   div2.appendChild(aboutText);
   filmInformationContainer.appendChild(div2);
 
+  const div3 = document.createElement('div');
+  div3.classList.add('film__button__wrapper');
+
+  const addToWatchedButton = document.createElement('button');
+  addToWatchedButton.type = 'button';
+  addToWatchedButton.classList.add('film__button', 'btn__watch');
+  addToWatchedButton.dataset.id = movie.id;
+  addToWatchedButton.textContent = 'Add to watched';
+  div3.appendChild(addToWatchedButton);
+
+  const addToQueueButton = document.createElement('button');
+  addToQueueButton.type = 'button';
+  addToQueueButton.classList.add('film__button', 'btn__queue');
+  addToQueueButton.dataset.id = movie.id;
+  addToQueueButton.textContent = 'Add to queue';
+  div3.appendChild(addToQueueButton);
+
+  filmInformationContainer.appendChild(div3);
+
   content.appendChild(filmInformationContainer);
 
   return content;
