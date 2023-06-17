@@ -8,10 +8,7 @@ const ITEMS_PER_PAGE = 10; // liczba filmów wyświetlanych na stronie
 const paginationContainer = document.querySelector('#pagination-container');
 let currentPage = 1;
 
-
 import { openModal } from './movie-modal';
-
-
 
 // Funkcja do pobierania filmów z API TMDB
 async function fetchMovies(page) {
@@ -94,7 +91,7 @@ export async function createGallery() {
       await createGallery();
     });
   } catch (error) {
-    Notiflix.Notify.Failure(`Wystąpił błąd: ${error.message}`);
+    Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
   }
 }
 
@@ -108,13 +105,13 @@ export function createTrailerButton(movieId) {
       const youtubeData = await fetchYoutube(movieId);
       if (youtubeData.results.length > 0) {
         const trailerKey = youtubeData.results[0].key;
-        const youtubeUrl = `https://www.youtube.com/watch?v=${trailerKey}`;
+        const youtubeUrl = `https://www.youtube-nocookie.com/embed/${trailerKey}`;
         openLightbox(youtubeUrl);
       } else {
-        Notiflix.Notify.Warning('Nie znaleziono trailera dla tego filmu.');
+        Notiflix.Notify.Warning('There is no trailer for this movie');
       }
     } catch (error) {
-      Notiflix.Notify.Failure(`Wystąpił błąd: ${error.message}`);
+      Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
     }
   });
   return button;
