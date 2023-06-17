@@ -1,7 +1,7 @@
 import { API_KEY } from './api-service';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
-
+import { Report } from 'notiflix/build/notiflix-report-aio';
 import { fetchYoutube, openLightbox } from './trailer.js';
 
 const ITEMS_PER_PAGE = 10; // liczba filmów wyświetlanych na stronie
@@ -108,7 +108,7 @@ export function createTrailerButton(movieId) {
         const youtubeUrl = `https://www.youtube-nocookie.com/embed/${trailerKey}`;
         openLightbox(youtubeUrl);
       } else {
-        Notiflix.Notify.Warning('There is no trailer for this movie');
+        Report.warning('Video not found', `There is no trailer to display.`, 'Ok');
       }
     } catch (error) {
       Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
