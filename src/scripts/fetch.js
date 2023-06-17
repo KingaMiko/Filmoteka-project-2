@@ -7,7 +7,7 @@ export async function fetchGenres() {
     `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`,
   );
   const data = await response.json();
-  console.log(data);
+
   genresList = data.genres;
 }
 

@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 import { createGallery, createTrailerButton } from './gallery';
 import debounce from 'lodash/debounce';
 import Pagination from 'tui-pagination';
-
+//import { fetchGenres, fetchMovies } from './fetch';
 import { openModal } from './movie-modal';
 
 const MOVIES_PATH = 'https://api.themoviedb.org/3/search/movie';
@@ -127,7 +127,20 @@ function searchMovies(query, page) {
       }
       return response.json();
     })
-    .then(data => data.results);
+    .then(data => {
+      const movies = data.results;
+
+      movies.forEach(movie => {
+        movie.genres = movie.genre_ids
+          .map(id => {
+            const genre = genresList.find(genre => genre.id === id);
+            return genre ? genre.name : null;
+          })
+          .filter(name => name !== null);
+      });
+
+      return movies;
+    });
 }
 
 function fetchGenres() {

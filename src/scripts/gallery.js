@@ -51,7 +51,8 @@ export async function createGallery() {
 
       const subtitle = document.createElement('h3');
       const year = movie.release_date.substring(0, 4);
-      subtitle.textContent = `${year}`;
+      const genre = movie.genres ? movie.genres.join(', ') : 'N/A';
+      subtitle.textContent = `${genre} | ${year}`;
 
       const trailerButton = createTrailerButton(movie.id);
       link.appendChild(trailerButton);

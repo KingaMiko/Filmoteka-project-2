@@ -1,7 +1,7 @@
 //import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const modalBackdrop = document.querySelector('.modal__backdrop');
 const modalContainer = document.querySelector('.modal__container');
-import { fetchGenres, fetchMovies } from './fetch';
+//import { fetchGenres, fetchMovies } from './fetch';
 
 function buildModalContent(movie) {
   const content = document.createElement('div');
