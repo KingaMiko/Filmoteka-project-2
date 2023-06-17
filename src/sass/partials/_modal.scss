@@ -147,6 +147,19 @@
   }
 }
 
+.activated {
+  background-color: $color-accent;
+  color: white;
+  border: 1px solid $color-accent;
+}
+
+.remove-hover-focus:hover,
+.remove-hover-focus:focus {
+  background-color: initial;
+  color: initial;
+  border: initial;
+}
+
 .film__button:first-child {
   margin-right: 15px;
 }
