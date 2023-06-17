@@ -2,6 +2,8 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const modalBackdrop = document.querySelector('.modal__backdrop');
 const modalContainer = document.querySelector('.modal__container');
 //import { fetchGenres, fetchMovies } from './fetch';
+import Notiflix from 'notiflix';
+
 
 function buildModalContent(movie) {
   const content = document.createElement('div');
@@ -179,6 +181,36 @@ function buildModalContent(movie) {
   addToWatchedButton.textContent = 'Add to watched';
   div3.appendChild(addToWatchedButton);
 
+
+
+
+  
+
+  addToWatchedButton.addEventListener('click', toggleWatched);
+function toggleWatched() {
+  if (addToWatchedButton.classList.contains('activated')) {
+    removeFromWatched();
+  } else {
+    addToWatchedButton.classList.add('activated');
+    addToWatchedButton.textContent = 'Remove from watched';
+    addToWatchedButton.addEventListener('click', removeFromWatched);
+    
+    console.log('Film został dodany do listy obejrzanych!')
+  }
+}
+
+function removeFromWatched() {
+  addToWatchedButton.classList.remove('activated');
+  addToWatchedButton.textContent = 'Add to watched';
+  addToWatchedButton.removeEventListener('click', removeFromWatched);
+
+  console.log('Film został usunięty z listy obejrzanych!')
+}
+
+
+
+
+
   const addToQueueButton = document.createElement('button');
   addToQueueButton.type = 'button';
   addToQueueButton.classList.add('film__button', 'btn__queue');
@@ -186,6 +218,36 @@ function buildModalContent(movie) {
   addToQueueButton.textContent = 'Add to queue';
   div3.appendChild(addToQueueButton);
 
+
+
+
+  addToQueueButton.addEventListener('click', toggleQueue);
+function toggleQueue() {
+  if (addToQueueButton.classList.contains('activated')) {
+    removeFromQueue();
+  } else {
+    addToQueueButton.classList.add('activated');
+    addToQueueButton.textContent = 'Remove from queue';
+    addToQueueButton.addEventListener('click', removeFromQueue);
+    
+    console.log('Film został dodany do kolejki!')
+  }
+}
+
+function removeFromQueue() {
+  addToQueueButton.classList.remove('activated');
+  addToQueueButton.textContent = 'Add to queue';
+  addToQueueButton.removeEventListener('click', removeFromQueue);
+
+  console.log('Film został usunięty z kolejki!')
+}
+
+
+
+
+
+
+  
   filmInformationContainer.appendChild(div3);
 
   content.appendChild(filmInformationContainer);
