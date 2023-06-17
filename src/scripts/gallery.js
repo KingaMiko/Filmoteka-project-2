@@ -11,15 +11,6 @@ let currentPage = 1;
 
 import { openModal } from './movie-modal';
 
-// Funkcja do pobierania filmów z API TMDB
-async function fetchMovies(page) {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&page=${page}`,
-  );
-  const data = await response.json();
-  return data.results;
-}
-
 // Funkcja do pobierania całkowitej liczby filmów
 async function fetchTotalMoviesCount() {
   const response = await fetch(
