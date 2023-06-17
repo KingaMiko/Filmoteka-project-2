@@ -2,7 +2,8 @@ import { API_KEY } from './api-service';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-import { fetchYoutube, openLightbox } from './trailer.js';
+import { fetchYoutube, openLightbox } from './trailer';
+import { fetchGenres, fetchMovies } from './fetch';
 
 const ITEMS_PER_PAGE = 10; // liczba filmów wyświetlanych na stronie
 const paginationContainer = document.querySelector('#pagination-container');

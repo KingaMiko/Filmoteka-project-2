@@ -1,11 +1,11 @@
 //import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const modalBackdrop = document.querySelector('.modal__backdrop');
 const modalContainer = document.querySelector('.modal__container');
+import { fetchGenres, fetchMovies } from './fetch';
 
 function buildModalContent(movie) {
   const content = document.createElement('div');
   content.classList.add('modal-content');
-
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
   closeButton.classList.add('close__button');
@@ -104,7 +104,7 @@ function buildModalContent(movie) {
   if (movie.genres) {
     movie.genres.forEach((genre, index) => {
       const genreSpan = document.createElement('span');
-      genreSpan.textContent = genre.name;
+      genreSpan.textContent = genre;
       genreInfo.appendChild(genreSpan);
       if (index !== movie.genres.length - 1) {
         const commaSpan = document.createElement('span');
