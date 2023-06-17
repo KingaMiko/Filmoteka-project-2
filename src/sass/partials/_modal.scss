@@ -63,6 +63,7 @@
     height: 477.8px;
   }
 }
+
 .film__image {
   @media screen and (min-width: 768px) {
     margin-right: 30px;
@@ -164,7 +165,7 @@
   border: none;
   border-radius: 50%;
   background-color: transparent;
-    cursor: pointer;
+  cursor: pointer;
   // transition: background-color $transition-duration $timing-function;
   outline: none;
   background-position: center;

@@ -1,4 +1,4 @@
-//import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const modalBackdrop = document.querySelector('.modal__backdrop');
 const modalContainer = document.querySelector('.modal__container');
 //import { fetchGenres, fetchMovies } from './fetch';
@@ -22,6 +22,16 @@ function buildModalContent(movie) {
 
   const image = document.createElement('img');
   image.classList.add('image');
+
+  image.addEventListener('load', function () {
+    const loaderDiv = document.querySelector('.image-loader');
+    if (loaderDiv) {
+      loaderDiv.style.display = 'none';
+      Loading.remove();
+      image.style.display = 'block';
+    }
+  });
+
   if (movie.poster_path) {
     image.src = `https://www.themoviedb.org/t/p/w500${movie.poster_path}`;
     image.onerror = function () {
@@ -34,6 +44,30 @@ function buildModalContent(movie) {
     image.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
     image.alt = 'film photo';
   }
+
+  const loaderDiv = document.createElement('div');
+
+  loaderDiv.classList.add('image-loader');
+  loaderDiv.style.display = 'none';
+  image.addEventListener('load', function () {
+    loaderDiv.style.display = 'none';
+    Loading.remove();
+    image.style.display = 'block';
+  });
+
+  image.addEventListener('error', function () {
+    loaderDiv.style.display = 'none';
+    Loading.remove();
+    this.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
+  });
+
+  filmImageContainer.style.position = 'relative';
+  loaderDiv.style.position = 'absolute';
+  loaderDiv.style.top = '50%';
+  loaderDiv.style.left = '50%';
+  loaderDiv.style.transform = 'translate(-50%, -50%)';
+
+  filmImageContainer.appendChild(loaderDiv);
   filmImageContainer.appendChild(image);
   content.appendChild(filmImageContainer);
 
@@ -163,6 +197,13 @@ export function openModal(movie) {
   const modalContent = buildModalContent(movie);
   modalContainer.innerHTML = '';
   modalContainer.appendChild(modalContent);
+
+  const loaderDiv = document.querySelector('.image-loader');
+  loaderDiv.style.display = 'block';
+  Loading.pulse({
+    target: '.image-loader',
+    svgColor: 'red',
+  });
 
   modalBackdrop.style.display = 'flex';
   document.body.classList.add('modal-open');
