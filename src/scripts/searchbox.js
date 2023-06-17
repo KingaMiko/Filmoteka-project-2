@@ -16,8 +16,15 @@ const paginationContainer = document.querySelector('#pagination-container');
 let debounceTimeout;
 let lastSearchQuery = '';
 
+let genresList = [];
+
+fetchGenres().then(genres => {
+  genresList = genres;
+});
+
 export async function findMovie(page = 1) {
   const searchQuery = searchBox.value.trim();
+
   if (searchQuery === '') {
     Notiflix.Notify.warning('The field cannot be empty. Enter correct movie title');
     clearMovies();
@@ -147,6 +154,7 @@ function showNoResultsMessage() {
 
 function handleSearch() {
   const searchQuery = searchBox.value.trim();
+
   if (searchQuery === lastSearchQuery) {
     return;
   }
@@ -166,11 +174,9 @@ function handleSearch() {
   }, 300);
 }
 
-
 createGallery();
 
 createTrailerButton();
-
 
 searchBox.addEventListener('input', debounce(handleSearch, 300));
 searchForm.addEventListener('submit', e => e.preventDefault());
