@@ -1,8 +1,6 @@
-document.body.onload = function () {
-    setTimeout(function () {
-      const preloader = document.querySelector('.preloader');
-      if (!preloader.classList.contains('done')) {
-        preloader.classList.add('done');
-      }
-    }, 200);
-  };
+function showLoader() {
+  document.getElementById('loader').style.display = 'block';
+}
+function hideLoader() {
+  document.getElementById('loader').style.display = 'none';
+}
