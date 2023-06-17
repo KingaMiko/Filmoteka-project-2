@@ -10,7 +10,11 @@ function buildModalContent(movie) {
   closeButton.type = 'button';
   closeButton.classList.add('close__button');
   closeButton.dataset.action = 'close-modal';
-  closeButton.innerHTML = '&times;';
+  closeButton.innerHTML = `<svg class="modal__icon__close" width="30" height="30" viewbox="0 0 30 30" fill="none"
+  xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 8L22 22" stroke="black" stroke-width="2" />
+  <path d="M8 22L22 8" stroke="black" stroke-width="2" />
+  </svg>`;
   content.appendChild(closeButton);
 
   const filmImageContainer = document.createElement('div');
