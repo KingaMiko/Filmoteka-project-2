@@ -1,23 +1,22 @@
 <header class="header home">
-  <div class="header-container container ">
+  <div class="header-container container">
     <div class="header__tabs">
       <div class="header__title-panel">
         <a class="logo" href="./index.html">
-            <svg class="logo__icon">
-              <use href="/src/images/svg/icons.svg#film"></use>
-            </svg>
-            <span class="logo__title">Filmoteka</span>
-            </a>  
+          <svg class="logo__icon">
+            <use href="/src/images/svg/icons.svg#film"></use>
+          </svg>
+          <span class="logo__title">Filmoteka</span>
+        </a>
       </div>
       <nav class="header__nav">
         <ul class="header__controls" data-controls>
           <li><a href="./index.html" class="header__controls-item current-home">Home</a></li>
           <li><a href="./library.html" class="header__controls-item lib">My Library</a></li>
         </ul>
-        </nav>
-        </div>
-      
-    
+      </nav>
+    </div>
+
     <div class="header__panes" data-panes>
       <form class="header__pane-search-form">
         <label class="header__search-form-lab">
@@ -32,15 +31,20 @@
         <button class="header__serach-form-btn" type="submit">
           <svg class="header__serach-form-icon">
             <use href="/src/images/svg/icons.svg#search"></use>
-          </svg> 
+          </svg>
         </button>
       </form>
+      <div class="header__lang">
+        <button class="translate" id="e-lang-en">EN</button>
+        <span class="translate__span">|</span>
+        <button class="translate" id="e-lang-pl">PL</button>
+      </div>
       <div class="toolbar container">
         <div class="theme-switch">
           <svg class="theme-switch__icon" role="img" aria-label="Sun incon">
             <use href="/src/images/svg/icons.svg#sun"></use>
           </svg>
-      
+
           <div class="theme-switch__control">
             <input
               class="theme-switch__toggle day-night-switch"
@@ -49,47 +53,40 @@
               id="theme-switch-toggle"
               aria-label="Switch between dark and light theme"
             />
-            <label aria-hidden="true" class="theme-switch__track" for="theme-switch-toggle"> </label>
+            <label aria-hidden="true" class="theme-switch__track" for="theme-switch-toggle">
+            </label>
             <div aria-hidden="true" class="theme-switch__marker"></div>
           </div>
-      
+
           <svg class="theme-switch__icon" aria-label="Moon icon">
             <use href="/src/images/svg/icons.svg#moon"></use>
           </svg>
         </div>
       </div>
-      <!-- <p class="search-form__error">Search result not successful. Enter the correct movie name.</p>  -->
+      <div class="header__genre">
+        <select class="genre">
+          <option>Choose genre</option>
+          <option value="Action">Action</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Animation">Animation</option>
+          <option value="Comedy">Comedy</option>
+          <option value="Crime">Crime</option>
+          <option value="Documentary">Documentary</option>
+          <option value="Drama">Drama</option>
+          <option value="Family">Family</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="History">History</option>
+          <option value="Horror">Horror</option>
+          <option value="Music">Music</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Romance">Romance</option>
+          <option value="Science Fiction">Science Fiction</option>
+          <option value="TV Movie">TV Movie</option>
+          <option value="Thriller">Thriller</option>
+          <option value="War">War</option>
+          <option value="Western">Western</option>
+        </select>
+      </div>
     </div>
-    </div>
-    <!-- <div class="header__container-select">
-      <select class="header__select">
-        <option value="en">EN</option>
-        <option value="uk">PL</option>
-      </select>
-    </div>
-    <div class="header__genre">
-      <select class="genre">
-        <option>Choose genre</option>
-        <option value="Action">Action</option>
-        <option value="Adventure">Adventure</option>
-        <option value="Animation">Animation</option>
-        <option value="Comedy">Comedy</option>
-        <option value="Crime">Crime</option>
-        <option value="Documentary">Documentary</option>
-        <option value="Drama">Drama</option>
-        <option value="Family">Family</option>
-        <option value="Fantasy">Fantasy</option>
-        <option value="History">History</option>
-        <option value="Horror">Horror</option>
-        <option value="Music">Music</option>
-        <option value="Mystery">Mystery</option>
-        <option value="Romance">Romance</option>
-        <option value="Science Fiction">Science Fiction</option>
-        <option value="TV Movie">TV Movie</option>
-        <option value="Thriller">Thriller</option>
-        <option value="War">War</option>
-        <option value="Western">Western</option>
-      </select>
-    </div> -->
   </div>
 </header>

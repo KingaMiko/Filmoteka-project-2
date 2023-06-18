@@ -1,27 +1,29 @@
 import { API_KEY } from './api-service';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
-import * as basicLightbox from 'basiclightbox';
-import 'basiclightbox/dist/basicLightbox.min.css';
 import { Report } from 'notiflix/build/notiflix-report-aio';
+import { fetchYoutube, openLightbox } from './trailer';
+import { fetchGenres, fetchMovies } from './fetch';
 
-const itemsPerPage = 10; // liczba filmów wyświetlanych na stronie
-let currentPage = 1; // aktualna strona
+const ITEMS_PER_PAGE = 10; // liczba filmów wyświetlanych na stronie
+const paginationContainer = document.querySelector('#pagination-container');
+let currentPage = 1;
 
-// Funkcja do pobierania filmów z API TMDB
-async function fetchMovies(page, itemsPerPage) {
+import { openModal } from './movie-modal';
+
+// Funkcja do pobierania całkowitej liczby filmów
+async function fetchTotalMoviesCount() {
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&page=${page}`,
+    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
   );
   const data = await response.json();
-  return data.results;
+  return data.total_results;
 }
 
 // Funkcja do tworzenia galerii filmów
-export async function createGallery(page = 1) {
+export async function createGallery() {
   try {
-    const movies = await fetchMovies(page, itemsPerPage);
+    const movies = await fetchMovies(currentPage);
 
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Wyczyść galerię przed dodaniem nowych filmów
@@ -37,6 +39,9 @@ export async function createGallery(page = 1) {
       const image = document.createElement('img');
       image.classList.add('card__pic');
       image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+      image.addEventListener('click', function () {
+        openModal(movie);
+      });
 
       const info = document.createElement('div');
       info.classList.add('card__info');
@@ -46,7 +51,8 @@ export async function createGallery(page = 1) {
 
       const subtitle = document.createElement('h3');
       const year = movie.release_date.substring(0, 4);
-      subtitle.textContent = `${year}`;
+      const genre = movie.genres ? movie.genres.join(', ') : 'N/A';
+      subtitle.textContent = `${genre} | ${year}`;
 
       const trailerButton = createTrailerButton(movie.id);
       link.appendChild(trailerButton);
@@ -63,25 +69,22 @@ export async function createGallery(page = 1) {
 
     // Inicjalizacja paginacji
     const totalItems = await fetchTotalMoviesCount();
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-    const paginationContainer = document.getElementById('pagination-container');
-    paginationContainer.innerHTML = ''; // Wyczyść kontener paginacji przed inicjalizacją
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
     const pagination = new Pagination(paginationContainer, {
       totalItems,
-      itemsPerPage,
+      itemsPerPage: ITEMS_PER_PAGE,
       visiblePages: 5,
-      page,
+      page: currentPage,
       centerAlign: true,
     });
 
     pagination.on('afterMove', async e => {
       currentPage = e.page;
-      await createGallery(currentPage);
+      await createGallery();
     });
   } catch (error) {
-    console.error('Wystąpił błąd:', error);
+    Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
   }
 }
 
@@ -97,77 +100,14 @@ export function createTrailerButton(movieId) {
       const youtubeData = await fetchYoutube(movieId);
       if (youtubeData.results.length > 0) {
         const trailerKey = youtubeData.results[0].key;
-        const youtubeUrl = `https://www.youtube.com/embed/${trailerKey}`;
+        const youtubeUrl = `https://www.youtube-nocookie.com/embed/${trailerKey}`;
         openLightbox(youtubeUrl);
       } else {
-        Report.warning('Video not found', `There is no trailer to display`, 'Ok');
+        Report.warning('Video not found', `There is no trailer to display.`, 'Ok');
       }
     } catch (error) {
-      Report.failure('ERROR', `${error.message}`, 'Ok');
+      Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
     }
   });
-
   return button;
 }
-
-async function fetchYoutube(movieId) {
-  try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`,
-    );
-    if (!response.ok) {
-      Notiflix.Notify.Failure('Failed to fetch data from the server.');
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
-  }
-}
-
-async function openLightbox(url) {
-  try {
-    Loading.pulse({
-      svgColor: 'red',
-    });
-
-    const instance = basicLightbox.create(
-      `<button type="button" id="youtube-close-btn" class="modal__btn-close">X</button><iframe
-        src="${url}"?autoplay=1&mute=1&controls=1>
-        </iframe>`,
-      {
-        onShow: instance => {
-          instance.element().querySelector('#youtube-close-btn').onclick = () => {
-            instance.close();
-            Loading.remove();
-          };
-          document.body.addEventListener('keydown', e => {
-            if (e.key === 'Escape') instance.close();
-          });
-        },
-      },
-    );
-    Loading.remove();
-    instance.show();
-  } catch (error) {
-    Notiflix.Notify.Failure('An error occurred while opening the lightbox.');
-  }
-
-  // const xButton = document.createElement('button');
-  // xButton.classList.add('modal__btn-close');
-  // xButton.innerHTML = 'X';
-}
-
-// KONIEC TRAILERA
-
-// Funkcja do pobierania liczby wszystkich filmów
-async function fetchTotalMoviesCount() {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
-  );
-  const data = await response.json();
-  return data.total_results;
-}
-
-// Inicjalizacja galerii po załadowaniu strony
-createGallery();

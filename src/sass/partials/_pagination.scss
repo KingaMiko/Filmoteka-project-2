@@ -1,0 +1,153 @@
+$color_1: #000000;
+$color_2: #fff;
+$background-color_1: #f4f4f4;
+$background-color_2: #ff6b01;
+$border-color_1: #ff6b01;
+
+.tui-pagination {
+	.tui-first {
+		overflow: hidden;
+		height: 26px;
+		padding: 0;
+		font-size: 0;
+		line-height: 26px;
+		white-space: nowrap;
+		font-weight: normal;
+		border: none;
+		background: #f7f7f7;
+		border-radius: 5px;
+		margin: 4px;
+		display: none;
+	}
+	.tui-prev {
+		overflow: hidden;
+		height: 26px;
+		padding: 0;
+		font-size: 0;
+		line-height: 26px;
+		white-space: nowrap;
+		font-weight: normal;
+		border: none;
+		background: #f7f7f7;
+		border-radius: 5px;
+		margin: 4px;
+		margin: 0;
+		height: 29.95px;
+		margin-right: 3px;
+	}
+	.tui-next {
+		overflow: hidden;
+		height: 26px;
+		padding: 0;
+		font-size: 0;
+		line-height: 26px;
+		white-space: nowrap;
+		font-weight: normal;
+		border: none;
+		background: #f7f7f7;
+		border-radius: 5px;
+		margin: 4px;
+		margin: 0;
+		height: 29.95px;
+		margin-left: 3px;
+	}
+	.tui-last {
+		overflow: hidden;
+		height: 26px;
+		padding: 0;
+		font-size: 0;
+		line-height: 26px;
+		white-space: nowrap;
+		font-weight: normal;
+		border: none;
+		background: #f7f7f7;
+		border-radius: 5px;
+		margin: 4px;
+		display: none;
+	}
+	.tui-prev-is-ellip {
+		overflow: hidden;
+		height: 26px;
+		padding: 0;
+		font-size: 0;
+		line-height: 26px;
+		white-space: nowrap;
+		font-weight: normal;
+		border: none;
+		background: #f7f7f7;
+		border-radius: 5px;
+		margin: 4px;
+		border-left: none;
+		border-right: 0;
+		display: none;
+	}
+	.tui-next-is-ellip {
+		overflow: hidden;
+		height: 26px;
+		padding: 0;
+		font-size: 0;
+		line-height: 26px;
+		white-space: nowrap;
+		font-weight: normal;
+		border: none;
+		background: #f7f7f7;
+		border-radius: 5px;
+		margin: 4px;
+		border-right: none;
+		border-left: 0;
+		display: none;
+	}
+	.tui-page-btn {
+		display: inline-block;
+		position: relative;
+		width: 28px;
+		padding: 8px 0 6px;
+		margin-left: 0;
+		color: $color_1;
+		font-style: normal;
+		font-weight: 500;
+		font-size: 12px;
+		line-height: 1.33;
+		text-decoration: none;
+		vertical-align: middle;
+		border: none;
+		&:hover {
+			background-color: $background-color_1;
+			border-radius: 5px;
+		}
+	}
+	.tui-is-selected {
+		color: $color_2;
+		border-radius: 5px;
+		background: #ff6b01;
+		border-color: $border-color_1;
+		cursor: default;
+		&:hover {
+			background-color: $background-color_2;
+		}
+	}
+	strong {
+		color: $color_2;
+		border-radius: 5px;
+		background: #ff6b01;
+		border-color: $border-color_1;
+		cursor: default;
+	}
+	.tui-first-child {
+		border-left: none;
+	}
+	.tui-last-child {
+		border-right: none;
+	}
+	.tui-first-child.tui-is-selected {
+		border-left: none;
+	}
+	.tui-last-child.tui-is-selected {
+		border-right: none;
+	}
+}
+.tui-page-btn {
+	.tui-first {
+		display: none;
+	}
+}
