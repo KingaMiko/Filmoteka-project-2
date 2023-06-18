@@ -2,12 +2,12 @@ import 'notiflix';
 
 // Film został dodany do kolejki
 function showAddedToQueueNotification() {
-  Notiflix.Notify.Success('Film został dodany do kolejki!');
+  Notiflix.Notify.Success('The video has been added to the queue!');
 }
 
 // Brak filmu w bazie
 function showMovieNotFoundNotification() {
-  Notiflix.Notify.Failure('Brak filmu w bazie!');
+  Notiflix.Notify.Failure('No movie in database!');
 }
 
 // Usunięto z kolejki + modal

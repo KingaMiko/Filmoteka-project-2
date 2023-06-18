@@ -10,12 +10,12 @@ export async function fetchYoutube(movieId) {
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`,
     );
     if (!response.ok) {
-      Notiflix.Notify.Failure('Failed to fetch data from the server.');
+      Notiflix.Notify.failure('Failed to fetch data from the server.');
     }
     const data = await response.json();
     return data;
   } catch (error) {
-    Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
+    Notiflix.Notify.failure(`An error occurred: ${error.message}`);
   }
 }
 
@@ -55,7 +55,7 @@ xmlns="http://www.w3.org/2000/svg">
     });
     instance.show();
   } catch (error) {
-    Notiflix.Notify.Failure('An error occurred while opening the lightbox.');
+    Notiflix.Notify.failure('An error occurred while opening the lightbox.');
   } finally {
     Loading.remove();
   }

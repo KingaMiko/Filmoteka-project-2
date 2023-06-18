@@ -88,8 +88,6 @@ export async function createGallery() {
   }
 }
 
-// TRAILER
-
 export function createTrailerButton(movieId) {
   const button = document.createElement('button');
   button.classList.add('card', 'trailer-button');
@@ -106,7 +104,7 @@ export function createTrailerButton(movieId) {
         Report.warning('Video not found', `There is no trailer to display.`, 'Ok');
       }
     } catch (error) {
-      Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
+      Notiflix.Notify.failure(`An error occurred: ${error.message}`);
     }
   });
   return button;
