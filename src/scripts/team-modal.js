@@ -4,15 +4,15 @@ const refs = {
   footerLink: document.querySelector('.footer__authors'),
   modalRef: document.querySelector('.modal__wrap'),
   teamRef: document.querySelector('.team__wrap'),
-  closeModalButton: document.querySelector('.modal__btn-close')
+  closeModalButton: document.querySelector('.modal__btn-close'),
 };
 
 refs.footerLink.addEventListener('click', onOpenModal);
 
 function loadIntoTeamModal(list) {
   const markup = list
-  .map(member => {
-    return `
+    .map(member => {
+      return `
     <li class="team">
       <img class="team__foto" 
       src="${member.photo}"
@@ -40,10 +40,9 @@ function loadIntoTeamModal(list) {
         </li>
     </ul>
   </div>`;
-  })
-  .join('');
-  
-  
+    })
+    .join('');
+
   refs.modalRef.innerHTML = '';
   refs.teamRef.innerHTML = markup;
   refs.closeModalButton.addEventListener('click', onCloseModal);
