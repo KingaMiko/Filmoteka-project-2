@@ -1,12 +1,12 @@
 window.addEventListener('DOMContentLoaded', function () {
   const allLang = ['en', 'pl'];
   const html = document.querySelector('html');
-  const input = document.querySelector('.header__search-form-input');
+  //const input = document.querySelector('.header__search-form-input');
   const headerItem = document.querySelectorAll('.header__controls-item');
-  const buttonLibrary = document.querySelectorAll('.header-library-buttons__button');
-  const list = document.querySelectorAll('option');
-  const firstValueList = [...list];
-  const newList = [...list];
+  //const buttonLibrary = document.querySelectorAll('.header-library-buttons__button');
+  //const list = document.querySelectorAll('option');
+  //const firstValueList = [...list];
+  //const newList = [...list];
 
   //newList.splice(0, 3);
   const langArr = {
@@ -76,84 +76,84 @@ window.addEventListener('DOMContentLoaded', function () {
       pl: 'Wybierz gatunek',
     },
   };
-  const genrelist = {
-    Action: {
-      en: 'Action',
-      pl: 'Akcja',
-    },
-    Adventure: {
-      en: 'Adventure',
-      pl: 'Przygoda',
-    },
-    Animation: {
-      en: 'Animation',
-      pl: 'Animacja',
-    },
-    Comedy: {
-      en: 'Comedy',
-      pl: 'Komedia',
-    },
-    Crime: {
-      en: 'Crime',
-      pl: 'Kryminał',
-    },
-    Documentary: {
-      en: 'Documentary',
-      pl: 'Dokument',
-    },
-    Drama: {
-      en: 'Drama',
-      pl: 'Dramat',
-    },
-    Family: {
-      en: 'Family',
-      pl: 'Familijny',
-    },
-    Fantasy: {
-      en: 'Fantasy',
-      pl: 'Fantastyka',
-    },
-    History: {
-      en: 'History',
-      pl: 'Historyczny',
-    },
-    Horror: {
-      en: 'Horror',
-      pl: 'Horror',
-    },
-    Music: {
-      en: 'Music',
-      pl: 'Muzyka',
-    },
-    Mystery: {
-      en: 'Mystery',
-      pl: 'Tajemnica',
-    },
-    Romance: {
-      en: 'Romance',
-      pl: 'Romans',
-    },
-    'Science Fiction': {
-      en: 'Science Fiction',
-      pl: 'Fantastyka naukowa',
-    },
-    'TV Movie': {
-      en: 'TV Movie',
-      pl: 'Film TV',
-    },
-    Thriller: {
-      en: 'Thriller',
-      pl: 'Thriller',
-    },
-    War: {
-      en: 'War',
-      pl: 'Wojenny',
-    },
-    Western: {
-      en: 'Western',
-      pl: 'Western',
-    },
-  };
+  //   const genrelist = {
+  //     Action: {
+  //       en: 'Action',
+  //       pl: 'Akcja',
+  //     },
+  //     Adventure: {
+  //       en: 'Adventure',
+  //       pl: 'Przygoda',
+  //     },
+  //     Animation: {
+  //       en: 'Animation',
+  //       pl: 'Animacja',
+  //     },
+  //     Comedy: {
+  //       en: 'Comedy',
+  //       pl: 'Komedia',
+  //     },
+  //     Crime: {
+  //       en: 'Crime',
+  //       pl: 'Kryminał',
+  //     },
+  //     Documentary: {
+  //       en: 'Documentary',
+  //       pl: 'Dokument',
+  //     },
+  //     Drama: {
+  //       en: 'Drama',
+  //       pl: 'Dramat',
+  //     },
+  //     Family: {
+  //       en: 'Family',
+  //       pl: 'Familijny',
+  //     },
+  //     Fantasy: {
+  //       en: 'Fantasy',
+  //       pl: 'Fantastyka',
+  //     },
+  //     History: {
+  //       en: 'History',
+  //       pl: 'Historyczny',
+  //     },
+  //     Horror: {
+  //       en: 'Horror',
+  //       pl: 'Horror',
+  //     },
+  //     Music: {
+  //       en: 'Music',
+  //       pl: 'Muzyka',
+  //     },
+  //     Mystery: {
+  //       en: 'Mystery',
+  //       pl: 'Tajemnica',
+  //     },
+  //     Romance: {
+  //       en: 'Romance',
+  //       pl: 'Romans',
+  //     },
+  //     'Science Fiction': {
+  //       en: 'Science Fiction',
+  //       pl: 'Fantastyka naukowa',
+  //     },
+  //     'TV Movie': {
+  //       en: 'TV Movie',
+  //       pl: 'Film TV',
+  //     },
+  //     Thriller: {
+  //       en: 'Thriller',
+  //       pl: 'Thriller',
+  //     },
+  //     War: {
+  //       en: 'War',
+  //       pl: 'Wojenny',
+  //     },
+  //     Western: {
+  //       en: 'Western',
+  //       pl: 'Western',
+  //     },
+  //   };
 
   // select.addEventListener('change', changeURLLanguage);
   // function changeURLLanguage() {
@@ -187,29 +187,28 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function changeLanguage() {
     let hash = localStorage.getItem('language');
-
     //select.value = hash;
     html.setAttribute('lang', hash);
     document.querySelector('.header__controls-item').textContent = langArr['headerLink'][hash];
-    document.querySelector('.logo__title').textContent = langArr['headerTitle'][hash];
+    //document.querySelector('.logo__title').textContent = langArr['headerTitle'][hash];
     headerItem[1].textContent = langArr['headerLibrary'][hash];
     document.querySelector('.footer__text').textContent = langArr['footeritem'][hash];
-    firstValueList[0].textContent = langArr['choose'][hash];
-    input.removeAttribute('placeholder');
+    //firstValueList[0].textContent = langArr['choose'][hash];
+    //input.removeAttribute('placeholder');
     document.querySelector('.dev').textContent = langArr['footer'][hash];
 
-    for (let key in genrelist) {
-      for (const element of newList) {
-        if (element.outerText === key) {
-          element.textContent = genrelist[key][hash];
-        }
-      }
-    }
-    if (hash === 'pl') {
-      input.setAttribute('placeholder', 'Szukaj film');
-    } else {
-      input.setAttribute('placeholder', 'Movie search');
-    }
+    // for (let key in genrelist) {
+    //   for (const element of newList) {
+    //     if (element.outerText === key) {
+    //       element.textContent = genrelist[key][hash];
+    //     }
+    //   }
+    // }
+    // if (hash === 'pl') {
+    //   input.setAttribute('placeholder', 'Szukaj film');
+    // } else {
+    //   input.setAttribute('placeholder', 'Movie search');
+    // }
   }
 
   // Inicjalizacja języka na podstawie wartości z localStorage lub domyślnie na 'en'
