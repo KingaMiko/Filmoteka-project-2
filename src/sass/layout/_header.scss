@@ -197,18 +197,20 @@
 .toolbar {
   display: flex;
   justify-content: flex-end;
-  padding: 16px 24px;
+  // padding: 16px 24px;
   position: relative;
-  top: 100px;
+  top: 115px;
   right: 7px;
 
   @media screen and (min-width: 768px) {
-    right: 105px;
-    top: 104px;
+    right: 135px;
+    top: 119px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
   @media screen and (min-width: 1280px) {
-    right: 120px;
-    top: 97px;
+    right: 133px;
+    top: 113px;
   }
 }
 
