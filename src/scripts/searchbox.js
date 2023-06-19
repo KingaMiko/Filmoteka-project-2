@@ -123,7 +123,9 @@ function searchMovies(query, page) {
   return fetch(url)
     .then(response => {
       if (!response.ok) {
-        throw new Error('Search result not successful. Enter the correct movie name and try again');
+        Notiflix.Notify.failure(
+          'Search result not successful. Enter the correct movie name and try again',
+        );
       }
       return response.json();
     })
@@ -148,7 +150,9 @@ function fetchGenres() {
   return fetch(url)
     .then(response => {
       if (!response.ok) {
-        throw new Error('Search result not successful. Enter the correct movie name and try again');
+        Notiflix.Notify.failure(
+          'Search result not successful. Enter the correct movie name and try again',
+        );
       }
       return response.json();
     })
