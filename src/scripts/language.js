@@ -8,7 +8,6 @@ window.addEventListener('DOMContentLoaded', function () {
   const firstValueList = [...list];
   const newList = [...list];
 
-  //newList.splice(0, 3);
   const langArr = {
     headerTitle: {
       en: 'Filmoteka',
@@ -154,14 +153,6 @@ window.addEventListener('DOMContentLoaded', function () {
       pl: 'Western',
     },
   };
-
-  // select.addEventListener('change', changeURLLanguage);
-  // function changeURLLanguage() {
-  //   let lang = select.value;
-  //   location.href = window.location.pathname + '#' + lang;
-  //   localStorage.setItem('language', lang);
-  //   location.reload();
-  // }
 
   const langButtons = document.querySelectorAll('.translate');
   langButtons.forEach(button => {
