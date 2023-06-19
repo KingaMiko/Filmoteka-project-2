@@ -84,7 +84,7 @@ export async function createGallery() {
       await createGallery();
     });
   } catch (error) {
-    Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
+    Notiflix.Notify.failure(`An error occurred: ${error.message}`);
   }
 }
 

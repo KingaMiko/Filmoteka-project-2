@@ -6,7 +6,7 @@ const buttonLibrary = document.querySelectorAll('.header-library-buttons__button
 const list = document.querySelectorAll('option');
 const firstValueList = [...list];
 const newList = [...list];
-newList.splice(0, 3);
+//newList.splice(0, 3);
 const langArr = {
   headerTitle: {
     en: 'Filmoteka',
@@ -33,13 +33,10 @@ const langArr = {
     pl: 'Wyszukaj film',
   },
   footeritem: {
-    en: '©  2023 | All Rights Reserved |',
-    pl: '©  2022 | Wszelkie prawa zastrzezone |',
+    en: '©  2023 | All Rights Reserved | ',
+    pl: '©  2023 | Wszelkie prawa zastrzezone | ',
   },
-  footeritems: {
-    en: 'Developed',
-    pl: 'Stworzone',
-  },
+
   filmvote: {
     en: 'Vote / Votes',
     pl: 'Głosów',
@@ -69,8 +66,8 @@ const langArr = {
     pl: 'Dodano do kolejki',
   },
   footer: {
-    en: 'Developed',
-    pl: 'Zaprojektowano',
+    en: 'Developed with',
+    pl: 'Zaprojektowano przez',
   },
   footercont: {
     en: 'CONTACT US',
@@ -153,8 +150,8 @@ const genrelist = {
     pl: 'Film TV',
   },
   Thriller: {
-    en: 'TV Movie',
-    pl: '',
+    en: 'Thriller',
+    pl: 'Thriller',
   },
   War: {
     en: 'War',
@@ -202,8 +199,9 @@ function changeLanguage() {
   document.querySelector('.logo__title').textContent = langArr['headerTitle'][hash];
   headerItem[1].textContent = langArr['headerLibrary'][hash];
   document.querySelector('.footer__text').textContent = langArr['footeritem'][hash];
-  firstValueList[2].textContent = langArr['choose'][hash];
+  firstValueList[0].textContent = langArr['choose'][hash];
   input.removeAttribute('placeholder');
+  document.querySelector('.dev').textContent = langArr['footer'][hash];
 
   for (let key in genrelist) {
     for (const element of newList) {
@@ -213,7 +211,7 @@ function changeLanguage() {
     }
   }
   if (hash === 'pl') {
-    input.setAttribute('placeholder', 'Szukaj filmu');
+    input.setAttribute('placeholder', 'Szukaj film');
   } else {
     input.setAttribute('placeholder', 'Movie search');
   }
