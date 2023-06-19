@@ -96,17 +96,19 @@
 .toolbar-library {
   display: flex;
   justify-content: flex-end;
-  padding: 16px 24px;
+  padding-left: 0px;
+  padding-right: 0px;
   position: relative;
-  top: 20px;
+  top: 28px;
+  right: 25px;
 
   @media screen and (min-width: 768px) {
-    top: -8px;
-    left: -30px;
+    top: 22px;
+    left: -140px;
   }
   @media screen and (min-width: 1280px) {
-    top: 0px;
-    left: -30px;
+    top: 26px;
+    left: -140px;
   }
 
   .header-controls {
@@ -127,5 +129,19 @@
   @media screen and (min-width: 768px) {
     top: 80px;
     right: 33px;
+  }
+}
+
+.header__lang--lib {
+  position: absolute;
+  right: 10px;
+  top: 205px;
+  @media screen and (min-width: 768px) {
+    right: 26px;
+    top: 195px;
+  }
+  @media screen and (min-width: 1280px) {
+    right: 28px;
+    top: 189px;
   }
 }
