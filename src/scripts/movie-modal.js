@@ -32,7 +32,32 @@ function getTranslation(key) {
   return translations[key][language];
 }
 
-function buildModalContent(movie) {
+function saveToLocalStorage(key, movie) {
+  let movies = localStorage.getItem(key);
+
+  if (!movies) {
+    movies = [];
+  } else {
+    movies = JSON.parse(movies);
+  }
+
+  movies.push(movie);
+  localStorage.setItem(key, JSON.stringify(movies));
+}
+
+function removeFromLocalStorage(key, movieId) {
+  let movies = localStorage.getItem(key);
+
+  if (!movies) {
+    return;
+  }
+
+  movies = JSON.parse(movies);
+  movies = movies.filter(movie => movie.id !== movieId);
+  localStorage.setItem(key, JSON.stringify(movies));
+}
+
+export function buildModalContent(movie) {
   const content = document.createElement('div');
   content.classList.add('modal-content');
   const closeButton = document.createElement('button');
@@ -211,58 +236,89 @@ function buildModalContent(movie) {
   addToWatchedButton.type = 'button';
   addToWatchedButton.classList.add('film__button', 'btn__watch');
   addToWatchedButton.dataset.id = movie.id;
-  addToWatchedButton.textContent = 'Add to watched';
-  div3.appendChild(addToWatchedButton);
 
-  addToWatchedButton.addEventListener('click', toggleWatched);
-  function toggleWatched() {
-    if (addToWatchedButton.classList.contains('activated')) {
-      removeFromWatched();
-    } else {
-      addToWatchedButton.classList.add('activated');
-      addToWatchedButton.textContent = 'Remove from watched';
-      addToWatchedButton.addEventListener('click', removeFromWatched);
-
-      console.log('Film został dodany do listy obejrzanych!');
-    }
-  }
-
-  function removeFromWatched() {
-    addToWatchedButton.classList.remove('activated');
+  if (isMovieInLocalStorage('watchedMovies', movie.id)) {
+    addToWatchedButton.classList.add('activated');
+    addToWatchedButton.textContent = 'Remove from watched';
+  } else {
     addToWatchedButton.textContent = 'Add to watched';
-    addToWatchedButton.removeEventListener('click', removeFromWatched);
-
-    console.log('Film został usunięty z listy obejrzanych!');
   }
+
+  addToWatchedButton.addEventListener('click', () => toggleWatched(addToWatchedButton, movie));
+  div3.appendChild(addToWatchedButton);
 
   const addToQueueButton = document.createElement('button');
   addToQueueButton.type = 'button';
   addToQueueButton.classList.add('film__button', 'btn__queue');
   addToQueueButton.dataset.id = movie.id;
-  addToQueueButton.textContent = 'Add to queue';
+
+  if (isMovieInLocalStorage('queuedMovies', movie.id)) {
+    addToQueueButton.classList.add('activated');
+    addToQueueButton.textContent = 'Remove from queue';
+  } else {
+    addToQueueButton.textContent = 'Add to queue';
+  }
+
+  addToQueueButton.addEventListener('click', () => toggleQueue(addToQueueButton, movie));
   div3.appendChild(addToQueueButton);
 
-  addToQueueButton.addEventListener('click', toggleQueue);
-  function toggleQueue() {
+  function toggleWatched(addToWatchedButton, movie) {
+    const watchedMovies = localStorage.getItem('watchedMovies');
+    let movies = watchedMovies ? JSON.parse(watchedMovies) : [];
+
+    if (addToWatchedButton.classList.contains('activated')) {
+      addToWatchedButton.classList.remove('activated');
+      addToWatchedButton.textContent = 'Add to watched';
+
+      movies = movies.filter(m => m.id !== movie.id);
+      removeFromWatched(addToWatchedButton, movie);
+    } else {
+      addToWatchedButton.classList.add('activated');
+      addToWatchedButton.textContent = 'Remove from watched';
+
+      movies.push(movie);
+      console.log('Film został dodany do listy obejrzanych!');
+    }
+
+    localStorage.setItem('watchedMovies', JSON.stringify(movies));
+  }
+
+  function toggleQueue(addToQueueButton, movie) {
+    const queuedMovies = localStorage.getItem('queuedMovies');
+    let movies = queuedMovies ? JSON.parse(queuedMovies) : [];
+
     if (addToQueueButton.classList.contains('activated')) {
-      removeFromQueue();
+      addToQueueButton.classList.remove('activated');
+      addToQueueButton.textContent = 'Add to queue';
+
+      movies = movies.filter(m => m.id !== movie.id);
+      removeFromQueue(addToQueueButton, movie);
     } else {
       addToQueueButton.classList.add('activated');
       addToQueueButton.textContent = 'Remove from queue';
-      addToQueueButton.addEventListener('click', removeFromQueue);
 
+      movies.push(movie);
       console.log('Film został dodany do kolejki!');
     }
+
+    localStorage.setItem('queuedMovies', JSON.stringify(movies));
   }
 
-  function removeFromQueue() {
+  function removeFromWatched(addToWatchedButton, movie) {
+    addToWatchedButton.classList.remove('activated');
+    addToWatchedButton.textContent = 'Add to watched';
+    addToWatchedButton.removeEventListener('click', () => toggleWatched(addToWatchedButton, movie));
+
+    console.log('Film został usunięty z listy obejrzanych!');
+  }
+
+  function removeFromQueue(addToQueueButton, movie) {
     addToQueueButton.classList.remove('activated');
     addToQueueButton.textContent = 'Add to queue';
-    addToQueueButton.removeEventListener('click', removeFromQueue);
+    addToQueueButton.removeEventListener('click', () => toggleQueue(addToQueueButton, movie));
 
     console.log('Film został usunięty z kolejki!');
   }
-
   filmInformationContainer.appendChild(div3);
 
   content.appendChild(filmInformationContainer);
@@ -317,4 +373,15 @@ function escKeyPress(event) {
   if (event.key === 'Escape') {
     closeModal();
   }
+}
+
+function isMovieInLocalStorage(key, movieId) {
+  const movies = localStorage.getItem(key);
+
+  if (movies) {
+    const parsedMovies = JSON.parse(movies);
+    return parsedMovies.some(movie => movie.id === movieId);
+  }
+
+  return false;
 }
