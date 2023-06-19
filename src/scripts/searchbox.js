@@ -12,6 +12,7 @@ const searchBox = document.querySelector('.header__search-form-input');
 const searchForm = document.querySelector('.header__pane-search-form');
 const gallery = document.querySelector('.gallery');
 const paginationContainer = document.querySelector('#pagination-container');
+const preferredLanguage = localStorage.getItem('language') || 'en';
 
 let debounceTimeout;
 let lastSearchQuery = '';
@@ -119,7 +120,9 @@ export async function findMovie(page = 1) {
 }
 
 function searchMovies(query, page) {
-  const url = `${MOVIES_PATH}?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${page}`;
+  const url = `${MOVIES_PATH}?api_key=${API_KEY}&query=${encodeURIComponent(
+    query,
+  )}&page=${page}&language=${preferredLanguage}`;
   return fetch(url)
     .then(response => {
       if (!response.ok) {
@@ -146,7 +149,7 @@ function searchMovies(query, page) {
 }
 
 function fetchGenres() {
-  const url = `${GENRES_PATH}?api_key=${API_KEY}`;
+  const url = `${GENRES_PATH}?api_key=${API_KEY}&language=${preferredLanguage}`;
   return fetch(url)
     .then(response => {
       if (!response.ok) {
