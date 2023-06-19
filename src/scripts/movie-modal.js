@@ -4,6 +4,34 @@ const modalContainer = document.querySelector('.modal__container');
 //import { fetchGenres, fetchMovies } from './fetch';
 import Notiflix from 'notiflix';
 
+const translations = {
+  filmvote: {
+    en: 'Vote / Votes',
+    pl: 'Głosów',
+  },
+  filmpop: {
+    en: 'Popularity',
+    pl: 'Popularność',
+  },
+  filmtitle: {
+    en: 'Original Title',
+    pl: 'Oryginalny tytuł',
+  },
+  filmg: {
+    en: 'Genre',
+    pl: 'Gatunek filmu',
+  },
+  filmabout: {
+    en: 'About',
+    pl: 'Opis',
+  },
+};
+
+function getTranslation(key) {
+  const language = localStorage.getItem('language') || 'en';
+  return translations[key][language];
+}
+
 function buildModalContent(movie) {
   const content = document.createElement('div');
   content.classList.add('modal-content');
@@ -172,6 +200,12 @@ function buildModalContent(movie) {
 
   const div3 = document.createElement('div');
   div3.classList.add('film__button__wrapper');
+
+  voteVotesDetails.textContent = getTranslation('filmvote');
+  popularityDetails.textContent = getTranslation('filmpop');
+  originalTitleDetails.textContent = getTranslation('filmtitle');
+  genreDetails.textContent = getTranslation('filmg');
+  aboutTitle.textContent = getTranslation('filmabout');
 
   const addToWatchedButton = document.createElement('button');
   addToWatchedButton.type = 'button';

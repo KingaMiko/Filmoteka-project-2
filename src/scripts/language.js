@@ -53,7 +53,7 @@ const langArr = {
     en: 'Genre',
     pl: 'Gatunek filmu',
   },
-  filab: {
+  filmabout: {
     en: 'About',
     pl: 'Opis',
   },
@@ -69,19 +69,9 @@ const langArr = {
     en: 'Developed with',
     pl: 'Zaprojektowano przez',
   },
-  footercont: {
-    en: 'CONTACT US',
-    pl: 'Skontaktuj się z nami',
-  },
-
   choose: {
     en: 'Choose genre',
     pl: 'Wybierz gatunek',
-  },
-
-  team: {
-    en: 'Developed',
-    pl: 'Zaprojektowano',
   },
 };
 const genrelist = {
