@@ -1,12 +1,35 @@
 import { API_KEY } from './api-service';
 
-export async function fetchTrendingMovies() {
-  const trendingMoviesUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
+let genresList = [];
+const preferredLanguage = localStorage.getItem('language') || 'en';
 
-  const response = await fetch(trendingMoviesUrl);
-  if (!response.ok) {
-    throw new Error('Błąd pobierania danych z API TMDB');
-  }
+export async function fetchGenres() {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=${preferredLanguage}`,
+  );
   const data = await response.json();
-  return data.results;
+
+  genresList = data.genres;
+}
+
+export async function fetchMovies(page) {
+  if (genresList.length === 0) {
+    await fetchGenres();
+  }
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&page=${page}&language=${preferredLanguage}`,
+  );
+  const data = await response.json();
+  const movies = data.results;
+
+  movies.forEach(movie => {
+    movie.genres = movie.genre_ids
+      .map(id => {
+        const genre = genresList.find(genre => genre.id === id);
+        return genre ? genre.name : null;
+      })
+      .filter(name => name !== null);
+  });
+
+  return movies;
 }

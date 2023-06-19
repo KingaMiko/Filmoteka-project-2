@@ -197,13 +197,20 @@
 .toolbar {
   display: flex;
   justify-content: flex-end;
-  padding: 16px 24px;
+  // padding: 16px 24px;
   position: relative;
-  top: 110px;
+  top: 115px;
+  right: 7px;
 
   @media screen and (min-width: 768px) {
-    top: 92px;
-    left: -100px;
+    right: 135px;
+    top: 119px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  @media screen and (min-width: 1280px) {
+    right: 133px;
+    top: 113px;
   }
 }
 
@@ -310,14 +317,52 @@
   }
 }
 
-.header__container-select {
+.header__lang {
   position: absolute;
-  right: 65px;
-  top: 105px;
+  right: 35px;
+  top: 135px;
+  @media screen and (min-width: 768px) {
+    right: 57px;
+    top: 115px;
+  }
+  @media screen and (min-width: 1280px) {
+    right: 58px;
+    top: 108px;
+  }
 }
 
 .header__genre {
   position: relative;
   left: 0px;
-  top: 50px;
+  top: 80px;
+  @media screen and (min-width: 768px) {
+    left: 0px;
+    top: 65px;
+  }
+  @media screen and (min-width: 1280px) {
+    left: 0px;
+    top: 55px;
+  }
+}
+
+.translate {
+  border: none;
+  text-decoration: none;
+  font-size: 16px;
+  background-color: transparent;
+  color: #f3efec;
+  transition: 300ms;
+  transition-timing-function: cubic-bezier(0.9, 0, 0.2, 1);
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    color: #ff6b08;
+    transition: 300ms;
+    transition-timing-function: cubic-bezier(0.9, 0, 0.2, 1);
+  }
+
+  &__span {
+    font-size: 20px;
+    color: #f3e5ea;
+  }
 }

@@ -42,7 +42,10 @@
 }
 
 .modal-content {
-  display: flex;
+  display: block;
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
 }
 .image {
   margin-right: auto;
@@ -60,6 +63,7 @@
     height: 477.8px;
   }
 }
+
 .film__image {
   @media screen and (min-width: 768px) {
     margin-right: 30px;
@@ -127,13 +131,13 @@
   border-radius: 5px;
   background-color: white;
   cursor: pointer;
-  // border: 1px solid $primary-text-color;
+  border: 1px solid $color-body;
   // transition: all $transition-duration $timing-function;
   &:hover,
   &:focus {
-    background-color: red;
-    // color: $white-text-color;
-    // border: 1px solid $accent-color;
+    background-color: $color-accent;
+    color: white;
+    border: 1px solid $color-accent;
   }
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     width: 125px;
@@ -143,14 +147,27 @@
   }
 }
 
+.activated {
+  background-color: $color-accent;
+  color: white;
+  border: 1px solid $color-accent;
+}
+
+.remove-hover-focus:hover,
+.remove-hover-focus:focus {
+  background-color: initial;
+  color: initial;
+  border: initial;
+}
+
 .film__button:first-child {
   margin-right: 15px;
 }
 
 .close__button {
   position: absolute;
-  top: 2%;
-  right: 2%;
+  top: 2;
+  right: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,11 +178,9 @@
   border: none;
   border-radius: 50%;
   background-color: transparent;
-  color: white;
   cursor: pointer;
   // transition: background-color $transition-duration $timing-function;
   outline: none;
-  // background-image: url('../images/close-modal.svg');
   background-position: center;
   background-size: 60%;
   background-repeat: no-repeat;

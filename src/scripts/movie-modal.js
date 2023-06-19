@@ -1,16 +1,49 @@
-//import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const modalBackdrop = document.querySelector('.modal__backdrop');
 const modalContainer = document.querySelector('.modal__container');
+//import { fetchGenres, fetchMovies } from './fetch';
+import Notiflix from 'notiflix';
+
+const translations = {
+  filmvote: {
+    en: 'Vote / Votes',
+    pl: 'Głosów',
+  },
+  filmpop: {
+    en: 'Popularity',
+    pl: 'Popularność',
+  },
+  filmtitle: {
+    en: 'Original Title',
+    pl: 'Oryginalny tytuł',
+  },
+  filmg: {
+    en: 'Genre',
+    pl: 'Gatunek filmu',
+  },
+  filmabout: {
+    en: 'About',
+    pl: 'Opis',
+  },
+};
+
+function getTranslation(key) {
+  const language = localStorage.getItem('language') || 'en';
+  return translations[key][language];
+}
 
 function buildModalContent(movie) {
   const content = document.createElement('div');
   content.classList.add('modal-content');
-
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
   closeButton.classList.add('close__button');
   closeButton.dataset.action = 'close-modal';
-  closeButton.innerHTML = '&times;';
+  closeButton.innerHTML = `<svg class="modal__icon__close" width="30" height="30" viewbox="0 0 30 30" fill="none"
+  xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 8L22 22" stroke="black" stroke-width="2" />
+  <path d="M8 22L22 8" stroke="black" stroke-width="2" />
+  </svg>`;
   content.appendChild(closeButton);
 
   const filmImageContainer = document.createElement('div');
@@ -18,6 +51,16 @@ function buildModalContent(movie) {
 
   const image = document.createElement('img');
   image.classList.add('image');
+
+  image.addEventListener('load', function () {
+    const loaderDiv = document.querySelector('.image-loader');
+    if (loaderDiv) {
+      loaderDiv.style.display = 'none';
+      Loading.remove();
+      image.style.display = 'block';
+    }
+  });
+
   if (movie.poster_path) {
     image.src = `https://www.themoviedb.org/t/p/w500${movie.poster_path}`;
     image.onerror = function () {
@@ -30,6 +73,30 @@ function buildModalContent(movie) {
     image.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
     image.alt = 'film photo';
   }
+
+  const loaderDiv = document.createElement('div');
+
+  loaderDiv.classList.add('image-loader');
+  loaderDiv.style.display = 'none';
+  image.addEventListener('load', function () {
+    loaderDiv.style.display = 'none';
+    Loading.remove();
+    image.style.display = 'block';
+  });
+
+  image.addEventListener('error', function () {
+    loaderDiv.style.display = 'none';
+    Loading.remove();
+    this.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
+  });
+
+  filmImageContainer.style.position = 'relative';
+  loaderDiv.style.position = 'absolute';
+  loaderDiv.style.top = '50%';
+  loaderDiv.style.left = '50%';
+  loaderDiv.style.transform = 'translate(-50%, -50%)';
+
+  filmImageContainer.appendChild(loaderDiv);
   filmImageContainer.appendChild(image);
   content.appendChild(filmImageContainer);
 
@@ -100,7 +167,7 @@ function buildModalContent(movie) {
   if (movie.genres) {
     movie.genres.forEach((genre, index) => {
       const genreSpan = document.createElement('span');
-      genreSpan.textContent = genre.name;
+      genreSpan.textContent = genre;
       genreInfo.appendChild(genreSpan);
       if (index !== movie.genres.length - 1) {
         const commaSpan = document.createElement('span');
@@ -131,6 +198,73 @@ function buildModalContent(movie) {
   div2.appendChild(aboutText);
   filmInformationContainer.appendChild(div2);
 
+  const div3 = document.createElement('div');
+  div3.classList.add('film__button__wrapper');
+
+  voteVotesDetails.textContent = getTranslation('filmvote');
+  popularityDetails.textContent = getTranslation('filmpop');
+  originalTitleDetails.textContent = getTranslation('filmtitle');
+  genreDetails.textContent = getTranslation('filmg');
+  aboutTitle.textContent = getTranslation('filmabout');
+
+  const addToWatchedButton = document.createElement('button');
+  addToWatchedButton.type = 'button';
+  addToWatchedButton.classList.add('film__button', 'btn__watch');
+  addToWatchedButton.dataset.id = movie.id;
+  addToWatchedButton.textContent = 'Add to watched';
+  div3.appendChild(addToWatchedButton);
+
+  addToWatchedButton.addEventListener('click', toggleWatched);
+  function toggleWatched() {
+    if (addToWatchedButton.classList.contains('activated')) {
+      removeFromWatched();
+    } else {
+      addToWatchedButton.classList.add('activated');
+      addToWatchedButton.textContent = 'Remove from watched';
+      addToWatchedButton.addEventListener('click', removeFromWatched);
+
+      console.log('Film został dodany do listy obejrzanych!');
+    }
+  }
+
+  function removeFromWatched() {
+    addToWatchedButton.classList.remove('activated');
+    addToWatchedButton.textContent = 'Add to watched';
+    addToWatchedButton.removeEventListener('click', removeFromWatched);
+
+    console.log('Film został usunięty z listy obejrzanych!');
+  }
+
+  const addToQueueButton = document.createElement('button');
+  addToQueueButton.type = 'button';
+  addToQueueButton.classList.add('film__button', 'btn__queue');
+  addToQueueButton.dataset.id = movie.id;
+  addToQueueButton.textContent = 'Add to queue';
+  div3.appendChild(addToQueueButton);
+
+  addToQueueButton.addEventListener('click', toggleQueue);
+  function toggleQueue() {
+    if (addToQueueButton.classList.contains('activated')) {
+      removeFromQueue();
+    } else {
+      addToQueueButton.classList.add('activated');
+      addToQueueButton.textContent = 'Remove from queue';
+      addToQueueButton.addEventListener('click', removeFromQueue);
+
+      console.log('Film został dodany do kolejki!');
+    }
+  }
+
+  function removeFromQueue() {
+    addToQueueButton.classList.remove('activated');
+    addToQueueButton.textContent = 'Add to queue';
+    addToQueueButton.removeEventListener('click', removeFromQueue);
+
+    console.log('Film został usunięty z kolejki!');
+  }
+
+  filmInformationContainer.appendChild(div3);
+
   content.appendChild(filmInformationContainer);
 
   return content;
@@ -140,6 +274,13 @@ export function openModal(movie) {
   const modalContent = buildModalContent(movie);
   modalContainer.innerHTML = '';
   modalContainer.appendChild(modalContent);
+
+  const loaderDiv = document.querySelector('.image-loader');
+  loaderDiv.style.display = 'block';
+  Loading.pulse({
+    target: '.image-loader',
+    svgColor: 'red',
+  });
 
   modalBackdrop.style.display = 'flex';
   document.body.classList.add('modal-open');
