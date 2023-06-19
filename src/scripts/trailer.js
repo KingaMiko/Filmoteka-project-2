@@ -1,6 +1,6 @@
 import { API_KEY } from './api-service';
 import Notiflix from 'notiflix';
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { showLoader, hideLoader } from './loader';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
@@ -21,9 +21,7 @@ export async function fetchYoutube(movieId) {
 
 export async function openLightbox(url) {
   try {
-    Loading.pulse({
-      svgColor: 'red',
-    });
+    showLoader();
 
     const closeButton = document.createElement('button');
     closeButton.setAttribute('type', 'button');
@@ -46,7 +44,7 @@ xmlns="http://www.w3.org/2000/svg">
       onShow: instance => {
         instance.element().querySelector('#youtube-close-btn').onclick = () => {
           instance.close();
-          Loading.remove();
+          hideLoader();
         };
         document.body.addEventListener('keydown', e => {
           if (e.key === 'Escape') instance.close();
@@ -57,6 +55,6 @@ xmlns="http://www.w3.org/2000/svg">
   } catch (error) {
     Notiflix.Notify.Failure('An error occurred while opening the lightbox.');
   } finally {
-    Loading.remove();
+    hideLoader();
   }
 }

@@ -4,7 +4,7 @@ import './scripts/fetch';
 import './scripts/gallery';
 
 import './scripts/movie-modal';
-
+import './scripts/loader';
 import './scripts/components/backToTop';
 import './scripts/searchbox';
 import './scripts/components/darkTheme';

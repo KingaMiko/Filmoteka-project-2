@@ -1,7 +1,6 @@
 import { API_KEY } from './api-service';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
-import { Report } from 'notiflix/build/notiflix-report-aio';
 import { fetchYoutube, openLightbox } from './trailer';
 import { fetchGenres, fetchMovies } from './fetch';
 
@@ -10,6 +9,7 @@ const paginationContainer = document.querySelector('#pagination-container');
 let currentPage = 1;
 
 import { openModal } from './movie-modal';
+import { hideLoader, showLoader } from './loader';
 
 // Funkcja do pobierania całkowitej liczby filmów
 async function fetchTotalMoviesCount() {
@@ -95,6 +95,8 @@ export function createTrailerButton(movieId) {
 
   button.addEventListener('click', async () => {
     try {
+      showLoader();
+
       const youtubeData = await fetchYoutube(movieId);
       if (youtubeData.results.length > 0) {
         const trailerKey = youtubeData.results[0].key;
@@ -105,6 +107,8 @@ export function createTrailerButton(movieId) {
       }
     } catch (error) {
       Notiflix.Notify.Failure(`An error occurred: ${error.message}`);
+    } finally { //dodane w ramach chowania się loadera po załadowaniu filmiku przez JSA
+      hideLoader()
     }
   });
   return button;

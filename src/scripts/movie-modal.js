@@ -1,6 +1,6 @@
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const modalBackdrop = document.querySelector('.modal__backdrop');
 const modalContainer = document.querySelector('.modal__container');
+import { showLoader, hideLoader } from './loader';
 //import { fetchGenres, fetchMovies } from './fetch';
 
 function buildModalContent(movie) {
@@ -23,15 +23,6 @@ function buildModalContent(movie) {
   const image = document.createElement('img');
   image.classList.add('image');
 
-  image.addEventListener('load', function () {
-    const loaderDiv = document.querySelector('.image-loader');
-    if (loaderDiv) {
-      loaderDiv.style.display = 'none';
-      Loading.remove();
-      image.style.display = 'block';
-    }
-  });
-
   if (movie.poster_path) {
     image.src = `https://www.themoviedb.org/t/p/w500${movie.poster_path}`;
     image.onerror = function () {
@@ -50,14 +41,12 @@ function buildModalContent(movie) {
   loaderDiv.classList.add('image-loader');
   loaderDiv.style.display = 'none';
   image.addEventListener('load', function () {
-    loaderDiv.style.display = 'none';
-    Loading.remove();
+    hideLoader();
     image.style.display = 'block';
   });
 
   image.addEventListener('error', function () {
-    loaderDiv.style.display = 'none';
-    Loading.remove();
+    hideLoader();
     this.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
   });
 
@@ -200,10 +189,7 @@ export function openModal(movie) {
 
   const loaderDiv = document.querySelector('.image-loader');
   loaderDiv.style.display = 'block';
-  Loading.pulse({
-    target: '.image-loader',
-    svgColor: 'red',
-  });
+  showLoader();
 
   modalBackdrop.style.display = 'flex';
   document.body.classList.add('modal-open');

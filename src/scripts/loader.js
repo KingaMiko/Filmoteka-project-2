@@ -1,6 +1,11 @@
-function showLoader() {
-  document.getElementById('loader').style.display = 'block';
+export function showLoader() {
+  const loader = document.getElementById('loader');
+  loader.classList.add('loader--visible');
+  loader.classList.remove('loader--hidden');
 }
-function hideLoader() {
-  document.getElementById('loader').style.display = 'none';
+
+export function hideLoader() {
+  const loader = document.getElementById('loader');
+  loader.classList.add('loader--hidden');
+  loader.classList.remove('loader--visible');
 }
