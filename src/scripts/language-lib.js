@@ -17,12 +17,12 @@ window.addEventListener('DOMContentLoaded', function () {
       pl: 'BIBLIOTEKA',
     },
     headerLibraryBtn: {
-      en: 'watched',
-      pl: 'obejrzane',
+      en: 'WATCHED',
+      pl: 'OBEJRZANE',
     },
     headerLibraryBtnque: {
-      en: 'queue',
-      pl: 'kolejka',
+      en: 'QUEUE',
+      pl: 'DO OBEJRZENIA',
     },
     placaholder: {
       en: 'Movie search',
@@ -69,6 +69,14 @@ window.addEventListener('DOMContentLoaded', function () {
       en: 'Choose genre',
       pl: 'Wybierz gatunek',
     },
+    butff: {
+      en: 'ADD TO WATCH',
+      pl: 'DDODAJ DO OBEJRZANYCH',
+    },
+    butfc: {
+      en: 'ADD TO QUEUE',
+      pl: 'DODAJ DO KOLEJKI',
+    },
   };
   const langButtons = document.querySelectorAll('.translate');
   langButtons.forEach(button => {
@@ -98,7 +106,9 @@ window.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.header__controls-item').textContent = langArr['headerLink'][hash];
     headerItem[1].textContent = langArr['headerLibrary'][hash];
     document.querySelector('.footer__text').textContent = langArr['footeritem'][hash];
-
+    document.querySelector('.film__button .btn__watch').textContent = langArr['butff'][hash];
+    document.querySelector('.header-library #w').textContent = langArr['headerLibraryBtn'][hash];
+    document.querySelector('.header-library #q').textContent = langArr['headerLibraryBtnque'][hash];
     document.querySelector('.dev').textContent = langArr['footer'][hash];
   }
 

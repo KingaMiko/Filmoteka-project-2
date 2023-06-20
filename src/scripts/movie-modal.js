@@ -219,7 +219,11 @@ export function buildModalContent(movie) {
     addToWatchedButton.textContent = 'Add to watched';
   }
 
-  addToWatchedButton.addEventListener('click', () => toggleWatched(addToWatchedButton, movie));
+  addToWatchedButton.addEventListener('click', () => {
+    toggleWatched(addToWatchedButton, movie);
+  });
+  div3.appendChild(addToWatchedButton);
+
   div3.appendChild(addToWatchedButton);
 
   const addToQueueButton = document.createElement('button');
@@ -234,7 +238,9 @@ export function buildModalContent(movie) {
     addToQueueButton.textContent = 'Add to queue';
   }
 
-  addToQueueButton.addEventListener('click', () => toggleQueue(addToQueueButton, movie));
+  addToQueueButton.addEventListener('click', () => {
+    toggleQueue(addToQueueButton, movie);
+  });
   div3.appendChild(addToQueueButton);
 
   function toggleWatched(addToWatchedButton, movie) {
@@ -283,17 +289,14 @@ export function buildModalContent(movie) {
     addToWatchedButton.classList.remove('activated');
     addToWatchedButton.textContent = 'Add to watched';
     addToWatchedButton.removeEventListener('click', () => toggleWatched(addToWatchedButton, movie));
-
-    console.log('Film został usunięty z listy obejrzanych!');
   }
 
   function removeFromQueue(addToQueueButton, movie) {
     addToQueueButton.classList.remove('activated');
     addToQueueButton.textContent = 'Add to queue';
     addToQueueButton.removeEventListener('click', () => toggleQueue(addToQueueButton, movie));
-
-    console.log('Film został usunięty z kolejki!');
   }
+
   filmInformationContainer.appendChild(div3);
 
   content.appendChild(filmInformationContainer);
