@@ -1,16 +1,10 @@
-/*
- * Główny plik dla stylów.
- * Wszystkie partials podłączamy tutaj.
- */
-// Style dla pliku z przykładem HTML fragmentu
 @import './utils/visually-hidden';
 @import './utils/reset';
 @import './utils/variables';
 @import './utils/container';
 @import './layout/header';
-// @import './partials/_pagination';
 @import './layout/header-library';
-//@import './partials/main-content';
+@import './partials/main-content';
 @import './layout/footer';
 @import './partials/backdrop';
 @import './partials/modal';
@@ -19,4 +13,3 @@
 @import './partials/backToTop';
 @import './partials/team-modal';
 @import './partials/pagination';
-//@import './partials/loader';
