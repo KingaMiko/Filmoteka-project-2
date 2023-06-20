@@ -3,7 +3,7 @@ import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { fetchYoutube, openLightbox } from './trailer';
-import { fetchGenres, fetchMovies } from './fetch';
+import { fetchGenres, genresList } from './fetch';
 import { openModal } from './movie-modal';
 
 const ITEMS_PER_PAGE = 10;
@@ -12,11 +12,26 @@ let currentPage = 1;
 
 // Funkcja do pobierania filmów na podstawie wybranej kategorii
 async function fetchMoviesByGenre(genreId, page) {
+  if (genresList.length === 0) {
+    await fetchGenres();
+  }
+
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`,
   );
   const data = await response.json();
-  return data.results;
+  const movies = data.results;
+
+  movies.forEach(movie => {
+    movie.genres = movie.genre_ids
+      .map(id => {
+        const genre = genresList.find(genre => genre.id === id);
+        return genre ? genre.name : null;
+      })
+      .filter(name => name !== null);
+  });
+
+  return movies;
 }
 
 // Funkcja do tworzenia galerii filmów
