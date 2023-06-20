@@ -3,7 +3,6 @@ window.addEventListener('DOMContentLoaded', function () {
   const html = document.querySelector('html');
   const input = document.querySelector('.header__search-form-input');
   const headerItem = document.querySelectorAll('.header__controls-item');
-  const buttonLibrary = document.querySelectorAll('.header-library-buttons__button');
   const list = document.querySelectorAll('option');
   const firstValueList = [...list];
   const newList = [...list];
@@ -59,12 +58,12 @@ window.addEventListener('DOMContentLoaded', function () {
       pl: 'Opis',
     },
     butff: {
-      en: 'Add to watched',
-      pl: 'Dodano do obejrzanych',
+      en: 'ADD TO WATCH',
+      pl: 'DDODAJ DO OBEJRZANYCH',
     },
     butfc: {
-      en: 'Add to queue',
-      pl: 'Dodano do kolejki',
+      en: 'ADD TO QUEUE',
+      pl: 'DODAJ DO KOLEJKI',
     },
     footer: {
       en: 'Developed with',
@@ -178,13 +177,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function changeLanguage() {
     let hash = localStorage.getItem('language');
-
-    //select.value = hash;
     html.setAttribute('lang', hash);
     document.querySelector('.header__controls-item').textContent = langArr['headerLink'][hash];
     document.querySelector('.logo__title').textContent = langArr['headerTitle'][hash];
     headerItem[1].textContent = langArr['headerLibrary'][hash];
-    document.querySelector('.footer__text').textContent = langArr['footeritem'][hash];
     firstValueList[0].textContent = langArr['choose'][hash];
     input.removeAttribute('placeholder');
     document.querySelector('.dev').textContent = langArr['footer'][hash];
@@ -203,7 +199,6 @@ window.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Inicjalizacja języka na podstawie wartości z localStorage lub domyślnie na 'en'
   let valueLn = localStorage.getItem('language');
   if (!allLang.includes(valueLn)) {
     valueLn = 'en';

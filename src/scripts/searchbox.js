@@ -3,7 +3,6 @@ import Notiflix from 'notiflix';
 import { createGallery, createTrailerButton } from './gallery';
 import debounce from 'lodash/debounce';
 import Pagination from 'tui-pagination';
-//import { fetchGenres, fetchMovies } from './fetch';
 import { openModal } from './movie-modal';
 
 const MOVIES_PATH = 'https://api.themoviedb.org/3/search/movie';
@@ -98,7 +97,7 @@ export async function findMovie(page = 1) {
 
     // Inicjalizacja paginacji
     const totalItems = movies.length;
-    const itemsPerPage = 10; // liczba filmów wyświetlanych na stronie
+    const itemsPerPage = 10;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
 
     const pagination = new Pagination(paginationContainer, {

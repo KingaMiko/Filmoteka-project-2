@@ -5,7 +5,7 @@ import { Report } from 'notiflix/build/notiflix-report-aio';
 import { fetchYoutube, openLightbox } from './trailer';
 import { fetchGenres, fetchMovies } from './fetch';
 
-const ITEMS_PER_PAGE = 10; // liczba filmów wyświetlanych na stronie
+const ITEMS_PER_PAGE = 10;
 const paginationContainer = document.querySelector('#pagination-container');
 let currentPage = 1;
 
@@ -26,7 +26,7 @@ export async function createGallery() {
     const movies = await fetchMovies(currentPage);
 
     const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = ''; // Wyczyść galerię przed dodaniem nowych filmów
+    gallery.innerHTML = '';
 
     movies.forEach(movie => {
       const card = document.createElement('div');

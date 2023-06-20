@@ -3,7 +3,6 @@ import './scripts/api-service';
 import './scripts/fetch';
 import './scripts/gallery';
 import './scripts/components/backToTop';
-//import './scripts/searchbox';
 import './scripts/movie-modal';
 import './scripts/components/darkTheme';
 import './scripts/team';
