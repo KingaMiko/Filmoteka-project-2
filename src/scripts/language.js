@@ -59,12 +59,12 @@ window.addEventListener('DOMContentLoaded', function () {
       pl: 'Opis',
     },
     butff: {
-      en: 'Add to watched',
-      pl: 'Dodano do obejrzanych',
+      en: 'ADD TO WATCH',
+      pl: 'DDODAJ DO OBEJRZANYCH',
     },
     butfc: {
-      en: 'Add to queue',
-      pl: 'Dodano do kolejki',
+      en: 'ADD TO QUEUE',
+      pl: 'DODAJ DO KOLEJKI',
     },
     footer: {
       en: 'Developed with',
@@ -184,7 +184,7 @@ window.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.header__controls-item').textContent = langArr['headerLink'][hash];
     document.querySelector('.logo__title').textContent = langArr['headerTitle'][hash];
     headerItem[1].textContent = langArr['headerLibrary'][hash];
-    document.querySelector('.footer__text').textContent = langArr['footeritem'][hash];
+    document.querySelector('.film__button').textContent = langArr['footeritem'][hash];
     firstValueList[0].textContent = langArr['choose'][hash];
     input.removeAttribute('placeholder');
     document.querySelector('.dev').textContent = langArr['footer'][hash];

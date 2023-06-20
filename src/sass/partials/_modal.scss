@@ -133,8 +133,7 @@
   cursor: pointer;
   border: 1px solid $color-body;
   // transition: all $transition-duration $timing-function;
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $color-accent;
     color: white;
     border: 1px solid $color-accent;
