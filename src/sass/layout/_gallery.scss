@@ -30,6 +30,7 @@
 }
 
 .card {
+  position: relative;
   width: 280px;
   height: 443px;
   margin-bottom: 20px;
@@ -145,4 +146,13 @@ iframe {
   position: relative;
   min-width: 50vw;
   height: 60vh;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
