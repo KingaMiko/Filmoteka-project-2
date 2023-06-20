@@ -1,4 +1,3 @@
-
 import { API_KEY } from './api-service';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
@@ -7,14 +6,14 @@ import { fetchYoutube, openLightbox } from './trailer';
 import { fetchGenres, fetchMovies } from './fetch';
 import { openModal } from './movie-modal';
 
-const ITEMS_PER_PAGE = 10; // liczba filmów wyświetlanych na stronie
+const ITEMS_PER_PAGE = 10;
 const paginationContainer = document.querySelector('#pagination-container');
 let currentPage = 1;
 
 // Funkcja do pobierania filmów na podstawie wybranej kategorii
 async function fetchMoviesByGenre(genreId, page) {
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`,
   );
   const data = await response.json();
   return data.results;
@@ -26,7 +25,7 @@ async function createGallery() {
     const movies = await fetchMoviesByGenre(currentGenreId, currentPage);
 
     const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = ''; // Wyczyść galerię przed dodaniem nowych filmów
+    gallery.innerHTML = '';
 
     movies.forEach(movie => {
       const card = document.createElement('div');
@@ -112,7 +111,7 @@ export function createTrailerButton(movieId) {
 // Funkcja do pobierania całkowitej liczby filmów
 async function fetchTotalMoviesCount() {
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
   );
   const data = await response.json();
   return data.total_results;
