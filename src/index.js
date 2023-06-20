@@ -1,6 +1,7 @@
 import './sass/main.scss';
 import './scripts/api-service';
 import './scripts/fetch';
+import'./scripts/categories-list';
 import './scripts/gallery';
 import './scripts/movie-modal';
 import './scripts/components/backToTop';
