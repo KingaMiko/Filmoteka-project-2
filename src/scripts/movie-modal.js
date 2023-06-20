@@ -1,4 +1,3 @@
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const modalBackdrop = document.querySelector('.modal__backdrop');
 const modalContainer = document.querySelector('.modal__container');
 
@@ -46,17 +45,20 @@ export function buildModalContent(movie) {
 
   const filmImageContainer = document.createElement('div');
   filmImageContainer.classList.add('film__image');
+  //filmImageContainer.style.width = '200px'; // Use the actual width of the image
+  //filmImageContainer.style.height = '200px'; // Use the actual height of the image
+  filmImageContainer.style.position = 'relative';
 
   const image = document.createElement('img');
   image.classList.add('image');
 
+  const loaderDiv = document.createElement('div');
+  loaderDiv.classList.add('image-loader');
+  loaderDiv.style.display = 'none';
+
   image.addEventListener('load', function () {
-    const loaderDiv = document.querySelector('.image-loader');
-    if (loaderDiv) {
-      loaderDiv.style.display = 'none';
-      Loading.remove();
-      image.style.display = 'block';
-    }
+    loaderDiv.style.display = 'none';
+    image.style.display = 'block';
   });
 
   if (movie.poster_path) {
@@ -67,24 +69,15 @@ export function buildModalContent(movie) {
     };
     image.alt = movie.title;
     image.title = movie.title;
+
+    loaderDiv.style.display = 'block'; // Start loading here
   } else {
     image.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
     image.alt = 'film photo';
   }
 
-  const loaderDiv = document.createElement('div');
-
-  loaderDiv.classList.add('image-loader');
-  loaderDiv.style.display = 'none';
-  image.addEventListener('load', function () {
-    loaderDiv.style.display = 'none';
-    Loading.remove();
-    image.style.display = 'block';
-  });
-
   image.addEventListener('error', function () {
     loaderDiv.style.display = 'none';
-    Loading.remove();
     this.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
   });
 
@@ -301,10 +294,6 @@ export function openModal(movie) {
   modalContainer.appendChild(modalContent);
   const loaderDiv = document.querySelector('.image-loader');
   loaderDiv.style.display = 'block';
-  Loading.pulse({
-    target: '.image-loader',
-    svgColor: 'red',
-  });
 
   modalBackdrop.style.display = 'flex';
   document.body.classList.add('modal-open');
