@@ -34,9 +34,34 @@ export async function createGallery() {
       gallery.appendChild(card);
 
       const link = document.createElement('a');
-      //link.href = `https://www.themoviedb.org/movie/${movie.id}`;
 
-      const image = document.createElement('img');
+      const image = new Image();
+      image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+      const loader = document.createElement('div');
+      loader.style.border = '5px solid #f3f3f3'; // Light gray
+      loader.style.borderTop = '5px solid #ff9505 '; // orange
+      loader.style.borderRadius = '50%';
+      loader.style.width = '50px';
+      loader.style.height = '50px';
+      loader.style.animation = 'spin 2s linear infinite';
+      loader.style.position = 'absolute';
+      loader.style.top = '50%';
+      loader.style.left = '50%';
+      loader.style.transform = 'translate(-50%, -50%)';
+      loader.style.display = 'block'; // Initially visible
+
+      link.appendChild(loader);
+
+      // Hide the loader once the image is loaded
+      image.addEventListener('load', function () {
+        loader.style.display = 'none';
+      });
+
+      image.addEventListener('error', function () {
+        loader.style.display = 'none';
+      });
+
       image.classList.add('card__pic');
       image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
       image.addEventListener('click', function () {
