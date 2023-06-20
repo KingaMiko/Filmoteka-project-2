@@ -21,10 +21,6 @@ export async function fetchYoutube(movieId) {
 
 export async function openLightbox(url) {
   try {
-    Loading.pulse({
-      svgColor: 'red',
-    });
-
     const closeButton = document.createElement('button');
     closeButton.setAttribute('type', 'button');
     closeButton.setAttribute('id', 'youtube-close-btn');
@@ -56,7 +52,5 @@ xmlns="http://www.w3.org/2000/svg">
     instance.show();
   } catch (error) {
     Notiflix.Notify.failure('An error occurred while opening the lightbox.');
-  } finally {
-    Loading.remove();
   }
 }
