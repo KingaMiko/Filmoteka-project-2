@@ -1,8 +1,6 @@
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const modalBackdrop = document.querySelector('.modal__backdrop');
 const modalContainer = document.querySelector('.modal__container');
-//import { fetchGenres, fetchMovies } from './fetch';
-import Notiflix from 'notiflix';
 
 const translations = {
   filmvote: {
@@ -224,8 +222,6 @@ export function buildModalContent(movie) {
   });
   div3.appendChild(addToWatchedButton);
 
-  div3.appendChild(addToWatchedButton);
-
   const addToQueueButton = document.createElement('button');
   addToQueueButton.type = 'button';
   addToQueueButton.classList.add('film__button', 'btn__queue');
@@ -250,15 +246,12 @@ export function buildModalContent(movie) {
     if (addToWatchedButton.classList.contains('activated')) {
       addToWatchedButton.classList.remove('activated');
       addToWatchedButton.textContent = 'Add to watched';
-
       movies = movies.filter(m => m.id !== movie.id);
       removeFromWatched(addToWatchedButton, movie);
     } else {
       addToWatchedButton.classList.add('activated');
       addToWatchedButton.textContent = 'Remove from watched';
-
       movies.push(movie);
-      console.log('Film został dodany do listy obejrzanych!');
     }
 
     localStorage.setItem('watchedMovies', JSON.stringify(movies));
@@ -277,9 +270,7 @@ export function buildModalContent(movie) {
     } else {
       addToQueueButton.classList.add('activated');
       addToQueueButton.textContent = 'Remove from queue';
-
       movies.push(movie);
-      console.log('Film został dodany do kolejki!');
     }
 
     localStorage.setItem('queuedMovies', JSON.stringify(movies));
@@ -308,7 +299,6 @@ export function openModal(movie) {
   const modalContent = buildModalContent(movie);
   modalContainer.innerHTML = '';
   modalContainer.appendChild(modalContent);
-
   const loaderDiv = document.querySelector('.image-loader');
   loaderDiv.style.display = 'block';
   Loading.pulse({

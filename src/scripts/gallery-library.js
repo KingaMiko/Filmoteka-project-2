@@ -2,7 +2,7 @@ import { createGallery, createTrailerButton } from './gallery';
 import { openModal } from './movie-modal';
 import Pagination from 'tui-pagination';
 
-const ITEMS_PER_PAGE = 10; // liczba filmów wyświetlanych na stronie
+const ITEMS_PER_PAGE = 10;
 const gallery = document.querySelector('.gallery');
 const watchedButton = document.querySelector('.header-library #w');
 const queuedButton = document.querySelector('.header-library #q');
@@ -11,7 +11,6 @@ const paginationContainer = document.querySelector('#pagination-container');
 let currentPage = 1;
 let activeButton = '';
 
-// funkcja do tworzenia karty filmu
 function createMovieCard(movie) {
   const card = document.createElement('div');
   card.classList.add('card');
@@ -58,9 +57,8 @@ function renderMoviesPage(watchedMovies) {
   const end = start + ITEMS_PER_PAGE;
   const moviesPage = watchedMovies.slice(start, end);
 
-  gallery.innerHTML = ''; // Wyczyść galerię przed dodaniem nowych filmów
+  gallery.innerHTML = '';
 
-  // Dla każdego filmu na tej stronie, stwórz kartę i dodaj do galerii
   moviesPage.forEach(movie => {
     const card = createMovieCard(movie);
     gallery.appendChild(card);
@@ -80,7 +78,6 @@ function setActiveButton(button) {
 
 export function showWatchedMovies() {
   setActiveButton(watchedButton);
-  // Pobieramy listę filmów z localStorage
   let watchedMovies = localStorage.getItem('watchedMovies');
   if (watchedMovies) {
     watchedMovies = JSON.parse(watchedMovies);
@@ -88,7 +85,6 @@ export function showWatchedMovies() {
     watchedMovies = [];
   }
 
-  // Inicjalizacja paginacji
   const totalItems = watchedMovies.length;
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
@@ -109,7 +105,6 @@ export function showWatchedMovies() {
 }
 export function showQueuedMovies() {
   setActiveButton(queuedButton);
-  // Pobieramy listę filmów z localStorage
   let queuedMovies = localStorage.getItem('queuedMovies');
   if (queuedMovies) {
     queuedMovies = JSON.parse(queuedMovies);
@@ -137,7 +132,6 @@ export function showQueuedMovies() {
   renderMoviesPage(queuedMovies);
 }
 
-// Nasłuchujemy kliknięcia na przycisk watched i wywołujemy funkcję showWatchedMovies
 watchedButton.addEventListener('click', showWatchedMovies);
 queuedButton.addEventListener('click', showQueuedMovies);
 document.addEventListener('DOMContentLoaded', showWatchedMovies);
