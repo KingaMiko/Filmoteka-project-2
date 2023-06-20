@@ -1,6 +1,6 @@
 import { API_KEY } from './api-service';
 
-let genresList = [];
+export let genresList = [];
 const preferredLanguage = localStorage.getItem('language') || 'en';
 
 export async function fetchGenres() {
