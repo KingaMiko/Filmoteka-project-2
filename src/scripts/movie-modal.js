@@ -32,31 +32,6 @@ function getTranslation(key) {
   return translations[key][language];
 }
 
-function saveToLocalStorage(key, movie) {
-  let movies = localStorage.getItem(key);
-
-  if (!movies) {
-    movies = [];
-  } else {
-    movies = JSON.parse(movies);
-  }
-
-  movies.push(movie);
-  localStorage.setItem(key, JSON.stringify(movies));
-}
-
-function removeFromLocalStorage(key, movieId) {
-  let movies = localStorage.getItem(key);
-
-  if (!movies) {
-    return;
-  }
-
-  movies = JSON.parse(movies);
-  movies = movies.filter(movie => movie.id !== movieId);
-  localStorage.setItem(key, JSON.stringify(movies));
-}
-
 export function buildModalContent(movie) {
   const content = document.createElement('div');
   content.classList.add('modal-content');
