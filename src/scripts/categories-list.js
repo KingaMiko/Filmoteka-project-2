@@ -15,9 +15,9 @@ async function fetchMoviesByGenre(genreId, page) {
   if (genresList.length === 0) {
     await fetchGenres();
   }
-
+  const preferredLanguage = localStorage.getItem('language') || 'en';
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`,
+    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}&language=${preferredLanguage}`,
   );
   const data = await response.json();
   const movies = data.results;
@@ -125,8 +125,9 @@ export function createTrailerButton(movieId) {
 
 // Funkcja do pobierania całkowitej liczby filmów
 async function fetchTotalMoviesCount() {
+  const preferredLanguage = localStorage.getItem('language') || 'en';
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
+    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&language=${preferredLanguage}`,
   );
   const data = await response.json();
   return data.total_results;
