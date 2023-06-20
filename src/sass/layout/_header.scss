@@ -366,3 +366,17 @@
     color: #f3e5ea;
   }
 }
+
+.header__genre select {
+  padding: 5px;
+  font-size: 14px;
+  color: #f3e5ea;
+  background-color: #333;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+.header__genre select option:hover {
+  background-color: rgba(188, 12, 12, 0.55);
+  color: #fff;
+}
