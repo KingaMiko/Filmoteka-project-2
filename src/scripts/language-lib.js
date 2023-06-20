@@ -106,7 +106,6 @@ window.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.header__controls-item').textContent = langArr['headerLink'][hash];
     headerItem[1].textContent = langArr['headerLibrary'][hash];
     document.querySelector('.footer__text').textContent = langArr['footeritem'][hash];
-    document.querySelector('.film__button .btn__watch').textContent = langArr['butff'][hash];
     document.querySelector('.header-library #w').textContent = langArr['headerLibraryBtn'][hash];
     document.querySelector('.header-library #q').textContent = langArr['headerLibraryBtnque'][hash];
     document.querySelector('.dev').textContent = langArr['footer'][hash];
