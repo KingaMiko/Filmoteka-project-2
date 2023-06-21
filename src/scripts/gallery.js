@@ -136,12 +136,5 @@ export function createTrailerButton(movieId) {
 }
 
 function scrollToTop() {
-  const scrollToTop = () => {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    if (scrollTop > 0) {
-      window.requestAnimationFrame(scrollToTop);
-      window.scrollTo(0, scrollTop - scrollTop / 2);
-    }
-  };
-  scrollToTop();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
