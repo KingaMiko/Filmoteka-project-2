@@ -95,6 +95,7 @@ async function createGallery() {
     pagination.on('afterMove', async e => {
       currentPage = e.page;
       await createGallery();
+      scrollToTop();
     });
   } catch (error) {
     Notiflix.Notify.failure(`An error occurred: ${error.message}`);
@@ -151,3 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Inicjalizacja galerii filmów
 let currentGenreId = '';
 createGallery();
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
