@@ -130,6 +130,7 @@ export function showQueuedMovies() {
   pagination.on('afterMove', e => {
     currentPage = e.page;
     renderMoviesPage(queuedMovies);
+    scrollToTop();
   });
 
   renderMoviesPage(queuedMovies);
@@ -138,3 +139,7 @@ export function showQueuedMovies() {
 watchedButton.addEventListener('click', showWatchedMovies);
 queuedButton.addEventListener('click', showQueuedMovies);
 document.addEventListener('DOMContentLoaded', showWatchedMovies);
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}

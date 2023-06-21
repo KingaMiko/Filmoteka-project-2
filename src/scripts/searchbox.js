@@ -110,6 +110,7 @@ export async function findMovie(page = 1) {
 
     pagination.on('afterMove', async e => {
       await findMovie(e.page);
+      scrollToTop();
     });
   } catch (error) {
     Notiflix.Notify.failure(
@@ -199,3 +200,6 @@ createTrailerButton();
 
 searchBox.addEventListener('input', debounce(handleSearch, 300));
 searchForm.addEventListener('submit', e => e.preventDefault());
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
