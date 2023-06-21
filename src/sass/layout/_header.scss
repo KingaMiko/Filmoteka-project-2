@@ -111,6 +111,7 @@
 
 .header__panes {
   position: absolute;
+  margin: 0 auto;
   //padding-top: 44px;
 }
 
@@ -335,6 +336,7 @@
   position: relative;
   left: 0px;
   top: 80px;
+  width: 100%;
   @media screen and (min-width: 768px) {
     left: 0px;
     top: 65px;
