@@ -45,8 +45,7 @@ export function buildModalContent(movie) {
 
   const filmImageContainer = document.createElement('div');
   filmImageContainer.classList.add('film__image');
-  //filmImageContainer.style.width = '200px'; // Use the actual width of the image
-  //filmImageContainer.style.height = '200px'; // Use the actual height of the image
+  filmImageContainer.style.width = '100%';
   filmImageContainer.style.position = 'relative';
 
   const image = document.createElement('img');
@@ -54,10 +53,14 @@ export function buildModalContent(movie) {
 
   const loaderDiv = document.createElement('div');
   loaderDiv.classList.add('image-loader');
+  loaderDiv.style.width = '100px';
+  loaderDiv.style.height = '100px';
   loaderDiv.style.display = 'none';
 
   image.addEventListener('load', function () {
     loaderDiv.style.display = 'none';
+    loaderDiv.style.width = this.width + 'px';
+    loaderDiv.style.height = this.height + 'px';
     image.style.display = 'block';
   });
 
