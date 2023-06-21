@@ -121,8 +121,9 @@ export function createTrailerButton(movieId) {
   button.addEventListener('click', async () => {
     try {
       const youtubeData = await fetchYoutube(movieId);
-      if (youtubeData.results.length > 0) {
-        const trailerKey = youtubeData.results[0].key;
+      const trailers = youtubeData.results.filter(video => video.type === 'Trailer');
+      if (trailers.length > 0) {
+        const trailerKey = trailers[0].key;
         const youtubeUrl = `https://www.youtube-nocookie.com/embed/${trailerKey}`;
         openLightbox(youtubeUrl);
       } else {
