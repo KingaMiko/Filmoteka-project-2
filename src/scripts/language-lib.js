@@ -77,6 +77,10 @@ window.addEventListener('DOMContentLoaded', function () {
       en: 'ADD TO QUEUE',
       pl: 'DODAJ DO KOLEJKI',
     },
+    message: {
+      en: 'Add movies to the list to see the gallery.',
+      pl: 'Dodaj filmy do listy i wyśwetl galerię.',
+    },
   };
   const langButtons = document.querySelectorAll('.translate');
   langButtons.forEach(button => {
@@ -109,6 +113,7 @@ window.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.header-library #w').textContent = langArr['headerLibraryBtn'][hash];
     document.querySelector('.header-library #q').textContent = langArr['headerLibraryBtnque'][hash];
     document.querySelector('.dev').textContent = langArr['footer'][hash];
+    document.querySelector('#msg').textContent = langArr['message'][hash];
   }
 
   let valueLn = localStorage.getItem('language');

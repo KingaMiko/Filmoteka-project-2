@@ -91,6 +91,12 @@ export function showWatchedMovies() {
   const totalItems = watchedMovies.length;
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
+  gallery.innerHTML = '';
+
+  if (watchedMovies.length === 0) {
+    displayNoMoviesMessage();
+    return; // return early if there are no movies
+  }
   const pagination = new Pagination(paginationContainer, {
     totalItems,
     itemsPerPage: ITEMS_PER_PAGE,
@@ -119,6 +125,12 @@ export function showQueuedMovies() {
   const totalItems = queuedMovies.length;
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
+  gallery.innerHTML = '';
+
+  if (queuedMovies.length === 0) {
+    displayNoMoviesMessage();
+    return; // return early if there are no movies
+  }
   const pagination = new Pagination(paginationContainer, {
     totalItems,
     itemsPerPage: ITEMS_PER_PAGE,
@@ -142,4 +154,15 @@ document.addEventListener('DOMContentLoaded', showWatchedMovies);
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function displayNoMoviesMessage() {
+  const messageDiv = document.createElement('div');
+  messageDiv.textContent = 'Add movies to list to see the gallery.';
+  messageDiv.style.width = '50%'; // adjust this value according to your needs
+  messageDiv.style.margin = '0 auto';
+  messageDiv.style.textAlign = 'center';
+  messageDiv.style.color = '#ff6b08';
+  messageDiv.setAttribute('id', 'msg');
+  gallery.appendChild(messageDiv);
 }
