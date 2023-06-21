@@ -2,6 +2,7 @@ const bodyRef = document.querySelector('body');
 const toggleRef = document.querySelector('#theme-switch-toggle');
 const footerDarktheme = document.querySelector('.footer');
 const modalDarkTheme = document.querySelector('.modal');
+const modalDarkBtn = document.querySelector('.modal__btn-close');
 
 const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
 
@@ -10,10 +11,12 @@ const setTheme = darkTheme => {
     bodyRef.classList.add('dark-theme');
     footerDarktheme.classList.add('dark-theme');
     modalDarkTheme.classList.add('dark-theme');
+    modalDarkBtn.classList.add('dark-theme');
   } else {
     bodyRef.classList.remove('dark-theme');
     footerDarktheme.classList.remove('dark-theme');
     modalDarkTheme.classList.remove('dark-theme');
+    modalDarkBtn.classList.remove('dark-theme');
   }
 };
 
