@@ -182,15 +182,20 @@ export function buildModalContent(movie) {
   filmInformationContainer.appendChild(div1);
 
   const div2 = document.createElement('div');
-  const aboutTitle = document.createElement('h3');
-  aboutTitle.classList.add('film__about__title');
-  aboutTitle.textContent = 'About';
-  const aboutText = document.createElement('p');
-  aboutText.classList.add('film__about__text');
-  aboutText.textContent = movie.overview;
-  div2.appendChild(aboutTitle);
-  div2.appendChild(aboutText);
-  filmInformationContainer.appendChild(div2);
+  if (movie.overview) {
+    const aboutTitle = document.createElement('h3');
+    aboutTitle.classList.add('film__about__title');
+    aboutTitle.textContent = getTranslation('filmabout');
+    div2.appendChild(aboutTitle);
+
+    const aboutText = document.createElement('p');
+    aboutText.classList.add('film__about__text');
+    aboutText.textContent = movie.overview;
+    div2.appendChild(aboutText);
+
+    // Teraz dodajemy div2 do filmInformationContainer tylko wtedy, gdy mamy opis
+    filmInformationContainer.appendChild(div2);
+  }
 
   const div3 = document.createElement('div');
   div3.classList.add('film__button__wrapper');
@@ -199,7 +204,7 @@ export function buildModalContent(movie) {
   popularityDetails.textContent = getTranslation('filmpop');
   originalTitleDetails.textContent = getTranslation('filmtitle');
   genreDetails.textContent = getTranslation('filmg');
-  aboutTitle.textContent = getTranslation('filmabout');
+  //aboutTitle.textContent = getTranslation('filmabout');
 
   const addToWatchedButton = document.createElement('button');
   addToWatchedButton.type = 'button';
