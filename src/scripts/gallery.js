@@ -4,12 +4,11 @@ import Notiflix from 'notiflix';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { fetchYoutube, openLightbox } from './trailer';
 import { fetchGenres, fetchMovies } from './fetch';
+import { openModal } from './movie-modal';
 
 const ITEMS_PER_PAGE = 10;
 const paginationContainer = document.querySelector('#pagination-container');
 let currentPage = 1;
-
-import { openModal } from './movie-modal';
 
 // Funkcja do pobierania całkowitej liczby filmów
 async function fetchTotalMoviesCount() {
@@ -107,6 +106,7 @@ export async function createGallery() {
     pagination.on('afterMove', async e => {
       currentPage = e.page;
       await createGallery();
+      scrollToTop(); // Przewiń stronę do góry
     });
   } catch (error) {
     //Notiflix.Notify.failure(`An error occurred: ${error.message}`);
@@ -133,4 +133,15 @@ export function createTrailerButton(movieId) {
     }
   });
   return button;
+}
+
+function scrollToTop() {
+  const scrollToTop = () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop > 0) {
+      window.requestAnimationFrame(scrollToTop);
+      window.scrollTo(0, scrollTop - scrollTop / 2);
+    }
+  };
+  scrollToTop();
 }
